@@ -9,8 +9,9 @@
 </head>
 <body>
     <form action="">
-        <input id="textInput" type="text">
-        <input id='submitImput' type="submit">
+        <input id="textInput" type="text" maxlength='20'>
+        <input id='submitImput' type="submit" onclick="userInput = 
+        console.log(transformUserInput(getUserInput()));">
     </form>
     <h1></h1>
     <script src="script.js" defer></script>
