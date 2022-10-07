@@ -1,5 +1,25 @@
-const he1 = document.querySelector('h1')
+const he1 = document.querySelector('h1') // ????????
+const textInput = document.getElementById('textInput');
+const submitInput = document.getElementById('submitInput');
 
+let userInput;
+
+let getUserInput = () => {
+    return textInput.value;
+}
+
+function transformUserInput(input) {
+    if (typeof input === 'string') {
+        return input.replace(/[0-9\s\W]/ig, '')
+    } else {
+        return 'user input is not a string. fix up your shit hoe'
+    }
+}
+
+console.log(userInput)
+
+
+// GET A LOCATION KEY
 async function getLocationKey(locationInput) {
     try {
         let promise = 
@@ -13,11 +33,14 @@ async function getLocationKey(locationInput) {
 
 console.log(getLocationKey())
 
+
+
+
+// PROMISE CHECKER
 function isPromise(p) {
     if (typeof p === 'object' && typeof p.then === 'function') {
       return true;
     }
-  
     return false;
   }
 
