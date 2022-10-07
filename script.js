@@ -1,9 +1,17 @@
-const he1 = document.querySelector('h1') // ????????
+const he1 = document.querySelector('h1.what') // ????????
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
+const currentTemeratureHeading = document.getElementById('currentTemperature')
+const cityAndCountry = document.getElementById('cityAndCountry');
+const currentDate = document.getElementById('currentDate');
+
+
+
 
 let userInput;
+
+
 
 btn.addEventListener('click', () => {
     userInput = getUserInput();
@@ -32,17 +40,27 @@ async function getLocationKey(input) {
         let promise = 
             await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`);
         let obj = await promise.json();
-        he1.textContent = obj[0]['Key']; /// ???
-        locationKey = obj[0]['Key'];
-        console.log(locationKey);
-
+        let firstLocationObj = obj[0]
+        he1.textContent = firstLocationObj['Key']; /// ???
+        cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
+        locationKey = firstLocationObj['Key'];
+        console.log(locationKey); // ?????
     } catch (err) {
         console.log('something went wrong with location key')
     }    
 }
 
 
+//GET WEATHER DETAILS
+async function getForcast(locationKey) {
+    let forcastPromise = 
+        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
+    let obj = await forcastPromise.json();
+    currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
+    console.log(obj[0]['Temperature']['Value'])
+}
 
+console.log(getForcast(274663))
 
 
 
