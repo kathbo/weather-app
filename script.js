@@ -1,11 +1,20 @@
 const he1 = document.querySelector('h1') // ????????
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
+const btn = document.querySelector('button');
 
 let userInput;
 
+btn.addEventListener('click', () => {
+    userInput = getUserInput();
+    //console.log(userInput)
+    he1.textContent = userInput;
+    console.log(getLocationKey(userInput))
+})
+
+
 let getUserInput = () => {
-    return textInput.value;
+    return transformUserInput(textInput.value);
 }
 
 function transformUserInput(input) {
@@ -16,22 +25,23 @@ function transformUserInput(input) {
     }
 }
 
-console.log(userInput)
-
-
-// GET A LOCATION KEY
-async function getLocationKey(locationInput) {
+//GET A LOCATION KEY
+let locationKey;
+async function getLocationKey(input) {
     try {
         let promise = 
-            await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=berlin`);
+            await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`);
         let obj = await promise.json();
-        he1.textContent = obj[0]['Key'];
+        he1.textContent = obj[0]['Key']; /// ???
+        locationKey = obj[0]['Key'];
+        console.log(locationKey);
+
     } catch (err) {
         console.log('something went wrong with location key')
     }    
 }
 
-console.log(getLocationKey())
+
 
 
 
