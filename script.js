@@ -9,16 +9,11 @@ const currentDate = document.getElementById('currentDate');
 
 
 
-let userInput;
+let transformedUserInput;
+//let locationKey;
 
 
 
-btn.addEventListener('click', () => {
-    userInput = getUserInput();
-    //console.log(userInput)
-    he1.textContent = userInput;
-    console.log(getLocationKey(userInput))
-})
 
 
 let getUserInput = () => {
@@ -34,7 +29,7 @@ function transformUserInput(input) {
 }
 
 //GET A LOCATION KEY
-let locationKey;
+let locationKey = 'not working hoe';
 async function getLocationKey(input) {
     try {
         let promise = 
@@ -44,25 +39,71 @@ async function getLocationKey(input) {
         he1.textContent = firstLocationObj['Key']; /// ???
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
-        console.log(locationKey); // ?????
+        //return locationKey
+        //console.log(locationKey); // ?????
     } catch (err) {
         console.log('something went wrong with location key')
     }    
 }
-
+console.log(locationKey)
 
 //GET WEATHER DETAILS
-async function getForcast(locationKey) {
-    let forcastPromise = 
-        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
-    let obj = await forcastPromise.json();
-    currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
-    console.log(obj[0]['Temperature']['Value'])
+// const getForcast = new Promise((resolve, reject) => {
+//     resolve(fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/348735?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`));
+//     reject('somebody fucked up')
+    
+
+// })
+//     .then((obj) => {return obj.json()})
+//     .then((arr) => {console.log(arr)})
+
+// async function getForcast(locationKey) {
+//     let forcastPromise = 
+//         await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
+//     let obj = await forcastPromise.json();
+//     currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
+//     console.log(obj[0]['Temperature']['Value'])
+//     return obj;
+// }
+// getForcast(348735).then((obj) => {return obj})
+// //getForcast().then((obj) => {return obj})
+//console.log(getForcast)
+
+
+
+let eightHoursDiv = document.querySelector('div.eightHours');
+
+for (let x = 1; x < 9; x++) {
+    let outerDiv = document.createElement('div');
+    let para = document.createElement('p');
+    para.textContent = x;
+    if (x === 1) para.textContent = 'Now'
+    outerDiv.appendChild(para);
+    eightHoursDiv.appendChild(outerDiv);
 }
 
-console.log(getForcast(274663))
+function createAndFillClickableDivs(promise) {
+
+}
 
 
+btn.addEventListener('click', () => {
+    transformedUserInput = getUserInput();
+    console.log('user input: ' + transformedUserInput) // ?????
+    
+    he1.textContent = transformedUserInput;
+    //createAndFillClickableDivs(getForcast())
+    getLocationKey(transformedUserInput)
+        .then(() => {
+            console.log('location key: ' + locationKey); // ??
+            getForcast(locationKey);
+        })
+        .catch(() => {
+            console.error('getForcast() func not working babe')
+        });
+    
+     // ?????
+})
 
 // PROMISE CHECKER
 function isPromise(p) {
