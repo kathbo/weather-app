@@ -10,11 +10,6 @@ const currentDate = document.getElementById('currentDate');
 
 
 let transformedUserInput;
-//let locationKey;
-
-
-
-
 
 let getUserInput = () => {
     return transformUserInput(textInput.value);
@@ -29,18 +24,16 @@ function transformUserInput(input) {
 }
 
 //GET A LOCATION KEY
-let locationKey = 'not working hoe';
+let locationKey = 'location key not working hoe';
 async function getLocationKey(input) {
     try {
         let promise = 
             await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`);
         let obj = await promise.json();
-        let firstLocationObj = obj[0]
+        let firstLocationObj = obj[0];
         he1.textContent = firstLocationObj['Key']; /// ???
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
-        //return locationKey
-        //console.log(locationKey); // ?????
     } catch (err) {
         console.log('something went wrong with location key')
     }    
@@ -48,26 +41,17 @@ async function getLocationKey(input) {
 console.log(locationKey)
 
 //GET WEATHER DETAILS
-// const getForcast = new Promise((resolve, reject) => {
-//     resolve(fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/348735?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`));
-//     reject('somebody fucked up')
-    
-
-// })
-//     .then((obj) => {return obj.json()})
-//     .then((arr) => {console.log(arr)})
-
-// async function getForcast(locationKey) {
-//     let forcastPromise = 
-//         await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
-//     let obj = await forcastPromise.json();
-//     currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
-//     console.log(obj[0]['Temperature']['Value'])
-//     return obj;
-// }
-// getForcast(348735).then((obj) => {return obj})
-// //getForcast().then((obj) => {return obj})
-//console.log(getForcast)
+let forecastArray = [];
+async function getForcast(locationKey) {
+    let forcastPromise = 
+        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
+    let obj = await forcastPromise.json();
+    currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
+    console.log(obj[0]['Temperature']['Value']);
+    for (let x of obj) {
+        forecastArray.push(x)
+    }
+}
 
 
 
@@ -97,6 +81,8 @@ btn.addEventListener('click', () => {
         .then(() => {
             console.log('location key: ' + locationKey); // ??
             getForcast(locationKey);
+        }).then(() => {
+            //console.log(getForcast(locationKey));
         })
         .catch(() => {
             console.error('getForcast() func not working babe')
