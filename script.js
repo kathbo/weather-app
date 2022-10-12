@@ -6,10 +6,25 @@ const currentTemeratureHeading = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
 
-
-
+btn.addEventListener('click', () => {
+    transformedUserInput = getUserInput();
+    console.log('user input: ' + transformedUserInput); // ??????
+    he1.textContent = transformedUserInput; // ????
+    getLocationKey(transformedUserInput)
+        .then(() => {
+            getForcast(locationKey)
+            .then(() => {
+                createAndFillClickableDivs(forecastArray);
+            })
+        })
+        .catch(() => {
+            console.error('getForcast() func not working babe')
+        });
+    
+})
 
 let transformedUserInput;
+
 
 let getUserInput = () => {
     return transformUserInput(textInput.value);
@@ -38,7 +53,6 @@ async function getLocationKey(input) {
         console.log('something went wrong with location key')
     }    
 }
-console.log(locationKey)
 
 //GET WEATHER DETAILS
 let forecastArray = [];
@@ -47,7 +61,7 @@ async function getForcast(locationKey) {
         await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
     let obj = await forcastPromise.json();
     currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
-    console.log(obj[0]['Temperature']['Value']);
+    if (forecastArray.length != 0) forecastArray = [];
     for (let x of obj) {
         forecastArray.push(x)
     }
@@ -57,39 +71,31 @@ async function getForcast(locationKey) {
 
 let eightHoursDiv = document.querySelector('div.eightHours');
 
-for (let x = 1; x < 9; x++) {
-    let outerDiv = document.createElement('div');
-    let para = document.createElement('p');
-    para.textContent = x;
-    if (x === 1) para.textContent = 'Now'
-    outerDiv.appendChild(para);
-    eightHoursDiv.appendChild(outerDiv);
+
+
+function createAndFillClickableDivs(arr) {
+    // current date
+    let dateNow = new Date(arr[0]['DateTime']);
+    console.log('date ' + dateNow)
+    let convertedDate = dateNow.toDateString();
+    console.log('convertedDate ' + convertedDate)
+    currentDate.textContent = convertedDate.slice(0,11);
+    console.log('slice ' + convertedDate.slice(0,11));
+
+    let displayedTime = 0; // == current time
+    eightHoursDiv.textContent = '';
+    // create divs
+    for (let x = 1; x < 9; x++) {
+        let outerDiv = document.createElement('div');
+        outerDiv.classList.add('eightHoursChildDivs');
+        let para = document.createElement('p');
+        para.textContent = arr[x]['DateTime'].substr(11,5);
+        if (x === 1) para.textContent = 'Now'
+        outerDiv.appendChild(para);
+        eightHoursDiv.appendChild(outerDiv);
+    }
+
 }
-
-function createAndFillClickableDivs(promise) {
-
-}
-
-
-btn.addEventListener('click', () => {
-    transformedUserInput = getUserInput();
-    console.log('user input: ' + transformedUserInput) // ?????
-    
-    he1.textContent = transformedUserInput;
-    //createAndFillClickableDivs(getForcast())
-    getLocationKey(transformedUserInput)
-        .then(() => {
-            console.log('location key: ' + locationKey); // ??
-            getForcast(locationKey);
-        }).then(() => {
-            //console.log(getForcast(locationKey));
-        })
-        .catch(() => {
-            console.error('getForcast() func not working babe')
-        });
-    
-     // ?????
-})
 
 // PROMISE CHECKER
 function isPromise(p) {
@@ -98,15 +104,3 @@ function isPromise(p) {
     }
     return false;
   }
-
-
-
-// let wether;
-// fetch('http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/178087?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true', {mode: 'cors'})
-//     .then((w) => {
-//         return w.json();
-//     }).then((e) => {
-//         wether = e;
-//         console.log(wether)
-//     })
-//     .catch((err) => {console.log(err)});
