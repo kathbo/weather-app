@@ -86,12 +86,20 @@ function createAndFillClickableDivs(arr) {
     eightHoursDiv.textContent = '';
     // create divs
     for (let x = 0; x < 8; x++) {
+        // p that displays hours
         let outerDiv = document.createElement('div');
         outerDiv.classList.add('eightHoursChildDivs');
-        let para = document.createElement('p');
-        para.textContent = arr[x]['DateTime'].substr(11,5);
-        if (x === 0) para.textContent = 'Now'
-        outerDiv.appendChild(para);
+        let paraTime = document.createElement('p');
+        paraTime.textContent = arr[x]['DateTime'].substr(11,5);
+        if (x === 0) paraTime.textContent = 'Now';
+        outerDiv.appendChild(paraTime);
+        // outer outer div with an icon and temperature
+        let insideOuterDiv = document.createElement('div');
+        insideOuterDiv.classList.add('insideOuterDiv');
+        let paraTemp = document.createElement('p');
+        paraTemp.textContent = arr[x]['Temperature']['Value'] + '°';
+        insideOuterDiv.appendChild(paraTemp);
+        outerDiv.appendChild(insideOuterDiv);
         eightHoursDiv.appendChild(outerDiv);
     }
 
