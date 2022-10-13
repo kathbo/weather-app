@@ -15,6 +15,7 @@ btn.addEventListener('click', () => {
             getForcast(locationKey)
             .then(() => {
                 createAndFillClickableDivs(forecastArray);
+
             })
         })
         .catch(() => {
@@ -82,7 +83,6 @@ function createAndFillClickableDivs(arr) {
     currentDate.textContent = convertedDate.slice(0,11);
     console.log('slice ' + convertedDate.slice(0,11));
 
-    let displayedTime = 0; // == current time
     eightHoursDiv.textContent = '';
     // create divs
     for (let x = 0; x < 8; x++) {
@@ -96,6 +96,7 @@ function createAndFillClickableDivs(arr) {
         // outer outer div with an icon and temperature
         let insideOuterDiv = document.createElement('div');
         insideOuterDiv.classList.add('insideOuterDiv');
+        insideOuterDiv.setAttribute('id', `${x}HoursFromNow`);
         let paraTemp = document.createElement('p');
         paraTemp.textContent = arr[x]['Temperature']['Value'] + '°';
         insideOuterDiv.appendChild(paraTemp);
@@ -103,7 +104,27 @@ function createAndFillClickableDivs(arr) {
         eightHoursDiv.appendChild(outerDiv);
     }
 
+    // another function ????
+    let displayedTime = '0HoursFromNow'
+
+    let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
+    insideOuterDivs.forEach((div) => {
+        div.addEventListener('click', () => {
+            displayedTime = div.id;
+            changeDetailsBasedOnAClickedDiv(displayedTime);
+    })})
+    // insideOuterDiv.forEach((div) => {
+    //     div.addEventListener('click', () => {
+    //         displayedTime = div.id;
+    //         console.log(displayedTime);
+    // })})
 }
+
+function changeDetailsBasedOnAClickedDiv(timeFromNow) {
+    let hourFromNow = Number(timeFromNow[0]);
+    currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
+}
+
 
 // PROMISE CHECKER
 function isPromise(p) {
