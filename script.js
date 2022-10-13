@@ -85,12 +85,12 @@ function createAndFillClickableDivs(arr) {
     let displayedTime = 0; // == current time
     eightHoursDiv.textContent = '';
     // create divs
-    for (let x = 1; x < 9; x++) {
+    for (let x = 0; x < 8; x++) {
         let outerDiv = document.createElement('div');
         outerDiv.classList.add('eightHoursChildDivs');
         let para = document.createElement('p');
         para.textContent = arr[x]['DateTime'].substr(11,5);
-        if (x === 1) para.textContent = 'Now'
+        if (x === 0) para.textContent = 'Now'
         outerDiv.appendChild(para);
         eightHoursDiv.appendChild(outerDiv);
     }
