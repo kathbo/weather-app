@@ -10,7 +10,7 @@ let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
 const paraPrecipitation = document.getElementById('paraPrecipitation');
 const paraHumidity = document.getElementById('paraHumidity');
 const paraWind = document.getElementById('paraWind');
-const paraCeiling = document.getElementById('paraCeiling');
+const paraUV = document.getElementById('paraUV');
 const paraFeelsLike = document.getElementById('paraFeelsLike');
 const paraVisibility = document.getElementById('paraVisibility');
 
@@ -129,7 +129,7 @@ function changeDetailsBasedOnAClickedDiv(timeFromNow) {
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
-    paraCeiling.textContent = forecastArray[hourFromNow]['Ceiling']['Value'] + 'm';
+    paraUV.textContent = forecastArray[hourFromNow]['UVIndexText'];
     paraFeelsLike.textContent = forecastArray[hourFromNow]['RealFeelTemperature']['Value'] + '°';
     paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
 }
