@@ -23,7 +23,7 @@ btn.addEventListener('click', () => {
             getForcast(locationKey)
             .then(() => {
                 createAndFillClickableDivs(forecastArray);
-
+                changeDetails('0');
             })
         })
         .catch(() => {
@@ -69,7 +69,6 @@ async function getForcast(locationKey) {
     let forcastPromise = 
         await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
     let obj = await forcastPromise.json();
-    currentTemeratureHeading.textContent = obj[0]['Temperature']['Value'] + '°';
     if (forecastArray.length != 0) forecastArray = [];
     for (let x of obj) {
         forecastArray.push(x)
@@ -114,16 +113,15 @@ function createAndFillClickableDivs(arr) {
 
     // another function ????
     let displayedTime = '0HoursFromNow'
-
     let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
     insideOuterDivs.forEach((div) => {
         div.addEventListener('click', () => {
             displayedTime = div.id;
-            changeDetailsBasedOnAClickedDiv(displayedTime);
+            changeDetails(displayedTime);
     })})
 }
 
-function changeDetailsBasedOnAClickedDiv(timeFromNow) {
+function changeDetails(timeFromNow) {
     let hourFromNow = Number(timeFromNow[0]);
     currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
