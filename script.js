@@ -5,7 +5,7 @@ const btn = document.querySelector('button');
 const currentTemeratureHeading = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
-let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
+const insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
 
 const paraPrecipitation = document.getElementById('paraPrecipitation');
 const paraHumidity = document.getElementById('paraHumidity');
@@ -13,6 +13,8 @@ const paraWind = document.getElementById('paraWind');
 const paraUV = document.getElementById('paraUV');
 const paraFeelsLike = document.getElementById('paraFeelsLike');
 const paraVisibility = document.getElementById('paraVisibility');
+const paraSunrise = document.getElementById('paraSunrise');
+const paraSunset = document.getElementById('paraSunset');
 
 btn.addEventListener('click', () => {
     transformedUserInput = getUserInput();
@@ -33,7 +35,6 @@ btn.addEventListener('click', () => {
 })
 
 let transformedUserInput;
-
 
 let getUserInput = () => {
     return transformUserInput(textInput.value);
@@ -75,11 +76,7 @@ async function getForcast(locationKey) {
     }
 }
 
-
-
 let eightHoursDiv = document.querySelector('div.eightHours');
-
-
 
 function createAndFillClickableDivs(arr) {
     // current date
@@ -132,6 +129,12 @@ function changeDetails(timeFromNow) {
     paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
 }
 
+async function getSunriseAndSunset() {
+    let promise = 
+        await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`);
+    let obj = await promise.json();
+
+}
 
 // PROMISE CHECKER
 function isPromise(p) {
