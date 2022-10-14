@@ -5,6 +5,14 @@ const btn = document.querySelector('button');
 const currentTemeratureHeading = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
+let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
+
+const paraPrecipitation = document.getElementById('paraPrecipitation');
+const paraHumidity = document.getElementById('paraHumidity');
+const paraWind = document.getElementById('paraWind');
+const paraCeiling = document.getElementById('paraCeiling');
+const paraFeelsLike = document.getElementById('paraFeelsLike');
+const paraVisibility = document.getElementById('paraVisibility');
 
 btn.addEventListener('click', () => {
     transformedUserInput = getUserInput();
@@ -113,16 +121,17 @@ function createAndFillClickableDivs(arr) {
             displayedTime = div.id;
             changeDetailsBasedOnAClickedDiv(displayedTime);
     })})
-    // insideOuterDiv.forEach((div) => {
-    //     div.addEventListener('click', () => {
-    //         displayedTime = div.id;
-    //         console.log(displayedTime);
-    // })})
 }
 
 function changeDetailsBasedOnAClickedDiv(timeFromNow) {
     let hourFromNow = Number(timeFromNow[0]);
     currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
+    paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
+    paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
+    paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
+    paraCeiling.textContent = forecastArray[hourFromNow]['Ceiling']['Value'] + 'm';
+    paraFeelsLike.textContent = forecastArray[hourFromNow]['RealFeelTemperature']['Value'] + '°';
+    paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
 }
 
 
