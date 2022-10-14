@@ -26,6 +26,7 @@ btn.addEventListener('click', () => {
             .then(() => {
                 createAndFillClickableDivs(forecastArray);
                 changeDetails('0');
+                getSunriseAndSunset();
             })
         })
         .catch(() => {
@@ -133,7 +134,9 @@ async function getSunriseAndSunset() {
     let promise = 
         await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`);
     let obj = await promise.json();
-
+    let sunObj = obj['DailyForecasts'][0]['Sun'];
+    paraSunrise.textContent = sunObj['Rise'].substr(11,5);
+    paraSunset.textContent = sunObj['Set'].substr(11,5);
 }
 
 // PROMISE CHECKER
