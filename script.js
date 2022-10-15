@@ -16,7 +16,7 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
-btn.addEventListener('click', () => {
+function executeProgram() {
     transformedUserInput = getUserInput();
     console.log('user input: ' + transformedUserInput); // ??????
     he1.textContent = transformedUserInput; // ????
@@ -32,7 +32,14 @@ btn.addEventListener('click', () => {
         .catch(() => {
             console.error('getForcast() func not working babe')
         });
-    
+ 
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        btn.click()
+    }
 })
 
 let transformedUserInput;
