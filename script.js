@@ -6,7 +6,7 @@ const currentTemeratureHeading = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
 const insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
-
+// weather details section:
 const paraPrecipitation = document.getElementById('paraPrecipitation');
 const paraHumidity = document.getElementById('paraHumidity');
 const paraWind = document.getElementById('paraWind');
@@ -28,13 +28,16 @@ function executeProgram() {
                 changeDetails('0');
                 getSunriseAndSunset();
             })
+            .catch(() => {
+                console.error('Array methods did not work')
+            })
         })
         .catch(() => {
-            console.error('getForcast() func not working babe')
+            console.error('getForcast did not exectute properly')
         });
- 
 }
 
+// PRESS ENTER = CLICK THE BUTTON
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -42,12 +45,11 @@ document.addEventListener('keydown', (event) => {
     }
 })
 
-let transformedUserInput;
-
+//REMOVING DIGITS, SPECIAL CHAR FROM THE INPUT
 let getUserInput = () => {
     return transformUserInput(textInput.value);
 }
-
+let transformedUserInput;
 function transformUserInput(input) {
     if (typeof input === 'string') {
         return input.replace(/[0-9\s\W]/ig, '')
@@ -72,7 +74,7 @@ async function getLocationKey(input) {
     }    
 }
 
-//GET WEATHER DETAILS
+//GET WEATHER DETAILS IN AN ARRAT OF OBJECTS
 let forecastArray = [];
 async function getForcast(locationKey) {
     let forcastPromise = 
@@ -84,8 +86,8 @@ async function getForcast(locationKey) {
     }
 }
 
+//CREATING EIGHT FUTURE HOURS FORECAST
 let eightHoursDiv = document.querySelector('div.eightHours');
-
 function createAndFillClickableDivs(arr) {
     // current date
     let dateNow = new Date(arr[0]['DateTime']);
@@ -115,8 +117,6 @@ function createAndFillClickableDivs(arr) {
         outerDiv.appendChild(insideOuterDiv);
         eightHoursDiv.appendChild(outerDiv);
     }
-
-    // another function ????
     let displayedTime = '0HoursFromNow'
     let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
     insideOuterDivs.forEach((div) => {
@@ -126,6 +126,7 @@ function createAndFillClickableDivs(arr) {
     })})
 }
 
+//MANIPULATING WEATHER DETAILS
 function changeDetails(timeFromNow) {
     let hourFromNow = Number(timeFromNow[0]);
     currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
@@ -137,6 +138,7 @@ function changeDetails(timeFromNow) {
     paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
 }
 
+//FETCHING SUNSET & SUNRISE HOURS FROM A DIFFERENT API
 async function getSunriseAndSunset() {
     let promise = 
         await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`);
