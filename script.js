@@ -17,11 +17,14 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
-function executeProgram() {
-    transformedUserInput = getUserInput();
+function executeProgram(input) {
+    if (input === '') {
+        transformedUserInput = getUserInput();
+        input = transformedUserInput;
+    }
     console.log('user input: ' + transformedUserInput); // ??????
     he1.textContent = transformedUserInput; // ????
-    getLocationKey(transformedUserInput)
+    getLocationKey(input)
         .then(() => {
             getForcast(locationKey)
             .then(() => {
@@ -36,6 +39,31 @@ function executeProgram() {
         .catch(() => {
             console.error('getForcast did not exectute properly')
         });
+}
+
+// function executeProgram() {
+//     transformedUserInput = getUserInput();
+//     console.log('user input: ' + transformedUserInput); // ??????
+//     he1.textContent = transformedUserInput; // ????
+//     getLocationKey(transformedUserInput)
+//         .then(() => {
+//             getForcast(locationKey)
+//             .then(() => {
+//                 createAndFillClickableDivs(forecastArray);
+//                 changeDetails('0');
+//                 getSunriseAndSunset();
+//             })
+//             .catch(() => {
+//                 console.error('Array methods did not work')
+//             })
+//         })
+//         .catch(() => {
+//             console.error('getForcast did not exectute properly')
+//         });
+// }
+
+window.onload = () => {
+    executeProgram('berlin')
 }
 
 // PRESS ENTER = CLICK THE BUTTON
