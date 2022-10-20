@@ -9,11 +9,11 @@
     <title>Your Favourite Weather App</title>
 </head>
 <body>
-    <form action="">
-        <input id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal">
-        
+    <form action="" onsubmit="return false">
+        <input id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required>
+        <button id='submitInput' type="submit" onclick="executeProgram('')">button</button>
     </form>
-    <button id='submitInput' type="submit" onclick="executeProgram('')">button</button>
+    
 
     <div class="currentDetails" style="background: pink">
         <h2 id="todayOrTomorrow">Today</h2>
