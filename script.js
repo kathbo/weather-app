@@ -63,7 +63,7 @@ function transformUserInput(input) {
     if (typeof input === 'string') {
         return input.replace(/[0-9\s\W]/ig, '')
     } else {
-        return 'user input is not a string. fix up your shit hoe'
+        console.error('User input is not a string.')
     }
 }
 
@@ -79,7 +79,7 @@ async function getLocationKey(input) {
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
     } catch (err) {
-        console.log('something went wrong with location key')
+        console.error('Something went wrong with a location key')
     }    
 }
 
