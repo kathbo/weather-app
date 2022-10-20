@@ -41,29 +41,9 @@ function executeProgram(input) {
         });
 }
 
-// function executeProgram() {
-//     transformedUserInput = getUserInput();
-//     console.log('user input: ' + transformedUserInput); // ??????
-//     he1.textContent = transformedUserInput; // ????
-//     getLocationKey(transformedUserInput)
-//         .then(() => {
-//             getForcast(locationKey)
-//             .then(() => {
-//                 createAndFillClickableDivs(forecastArray);
-//                 changeDetails('0');
-//                 getSunriseAndSunset();
-//             })
-//             .catch(() => {
-//                 console.error('Array methods did not work')
-//             })
-//         })
-//         .catch(() => {
-//             console.error('getForcast did not exectute properly')
-//         });
-// }
-
 window.onload = () => {
-    executeProgram('berlin')
+    textInput.value = ''
+    executeProgram('berlin');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
