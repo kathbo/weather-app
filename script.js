@@ -2,6 +2,7 @@ const he1 = document.querySelector('h1.what') // ????????
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
+const h2TodayOrTomorrow = document.getElementById('todayOrTomorrow');
 const currentTemeratureHeading = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
@@ -86,6 +87,15 @@ async function getForcast(locationKey) {
     }
 }
 
+// FIND AN INDEX OF '00:00' TO SWITCH BETWEEN TODAY/TOMORROW
+function todayOrTomorrow() {
+    let hourArr = []
+    for (let i = 0; i < 8; i++) {
+        hourArr.push(forecastArray[i]['DateTime'].substr(11,5));
+    }
+    return hourArr.indexOf('00:00')
+}
+
 //CREATING EIGHT FUTURE HOURS FORECAST
 let eightHoursDiv = document.querySelector('div.eightHours');
 function createAndFillClickableDivs(arr) {
@@ -129,6 +139,14 @@ function createAndFillClickableDivs(arr) {
 //MANIPULATING WEATHER DETAILS
 function changeDetails(timeFromNow) {
     let hourFromNow = Number(timeFromNow[0]);
+    let hoursFromMidnight = todayOrTomorrow();
+    if (hoursFromMidnight != -1) {
+        if (hourFromNow >= hoursFromMidnight) {
+            h2TodayOrTomorrow.textContent = 'Tomorrow'
+        } else {
+            h2TodayOrTomorrow.textContent = 'Today'
+        }
+    }
     currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
