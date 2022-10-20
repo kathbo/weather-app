@@ -18,11 +18,13 @@ const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
 function executeProgram(input) {
+
     if (input === '') {
+
         transformedUserInput = getUserInput();
         input = transformedUserInput;
     }
-    console.log('user input: ' + transformedUserInput); // ??????
+    console.log('!!!!!!!!!!user input: ' + transformedUserInput); // ??????
     he1.textContent = transformedUserInput; // ????
     getLocationKey(input)
         .then(() => {
@@ -37,7 +39,7 @@ function executeProgram(input) {
             })
         })
         .catch(() => {
-            console.error('getForcast did not exectute properly')
+            console.error('getForcast() did not exectute properly')
         });
 }
 
@@ -111,9 +113,9 @@ function createAndFillClickableDivs(arr) {
     let dateNow = new Date(arr[0]['DateTime']);
     console.log('date ' + dateNow)
     let convertedDate = dateNow.toDateString();
-    console.log('convertedDate ' + convertedDate)
-    currentDate.textContent = convertedDate.slice(0,11);
-    console.log('slice ' + convertedDate.slice(0,11));
+    let convertedDateSliced = convertedDate.slice(0,3) + ', ' + convertedDate.slice(4,10);
+    currentDate.textContent = convertedDateSliced;
+    console.log('slice ' + convertedDateSliced);
 
     eightHoursDiv.textContent = '';
     // create divs
