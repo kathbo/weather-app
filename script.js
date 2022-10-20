@@ -3,7 +3,7 @@ const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
 const h2TodayOrTomorrow = document.getElementById('todayOrTomorrow');
-const currentTemeratureHeading = document.getElementById('currentTemperature')
+const currentTemerature = document.getElementById('currentTemperature')
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
 const insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
@@ -157,7 +157,7 @@ function changeDetails(timeFromNow) {
             h2TodayOrTomorrow.textContent = 'Today'
         }
     }
-    currentTemeratureHeading.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
+    currentTemerature.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
