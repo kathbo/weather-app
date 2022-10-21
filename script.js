@@ -104,15 +104,13 @@ function todayOrTomorrow() {
     return hourArr.indexOf('00:00')
 }
 
-
-function twentyFourHourFormatToTwelve(hour) {
+//24H FORMAT -> 12H FORMAT CONVERTER
+function convertTwentyFourHourFormatToTwelve(hour) {
     let firtTwoDigits = +hour.slice(0, 2);
     let amOrPm = firtTwoDigits >= 12 ? 'pm' : 'am';
     let hours = (firtTwoDigits % 12) || 12;
     return hours + ' ' + amOrPm
 }
-
-
 
 //CREATING EIGHT FUTURE HOURS FORECAST
 let eightHoursDiv = document.querySelector('div.eightHours');
@@ -132,7 +130,7 @@ function createAndFillClickableDivs(arr) {
         let outerDiv = document.createElement('div');
         outerDiv.classList.add('eightHoursChildDivs');
         let paraTime = document.createElement('p');
-        paraTime.textContent = twentyFourHourFormatToTwelve(arr[x]['DateTime'].substr(11,5));
+        paraTime.textContent = convertTwentyFourHourFormatToTwelve(arr[x]['DateTime'].substr(11,5));
         if (x === 0) paraTime.textContent = 'Now';
         outerDiv.appendChild(paraTime);
         // outer outer div with an icon and temperature
