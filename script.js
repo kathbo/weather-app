@@ -138,7 +138,8 @@ function createAndFillClickableDivs(arr) {
         insideOuterDiv.classList.add('insideOuterDiv');
         insideOuterDiv.setAttribute('id', `${x}HoursFromNow`);
         let paraTemp = document.createElement('p');
-        paraTemp.textContent = arr[x]['Temperature']['Value'] + '°';
+        let temp = arr[x]['Temperature']['Value'];
+        paraTemp.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°'; 
         insideOuterDiv.appendChild(paraTemp);
         outerDiv.appendChild(insideOuterDiv);
         eightHoursDiv.appendChild(outerDiv);
