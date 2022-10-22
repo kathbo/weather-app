@@ -36,8 +36,8 @@ function executeProgram(input) {
                 console.error('Array methods did not work')
             })
         })
-        .catch(() => {
-            console.error('getForcast() did not exectute properly')
+        .catch((err) => {
+            console.error(err + 'getForcast() did not exectute properly')
         });
 }
 
@@ -79,7 +79,7 @@ async function getLocationKey(input) {
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
     } catch (err) {
-        console.error('Something went wrong with a location key')
+        alert('Entered city does not exist.');
     }    
 }
 
