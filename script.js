@@ -1,4 +1,3 @@
-const he1 = document.querySelector('h1.what') // ????????
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
@@ -22,8 +21,6 @@ function executeProgram(input) {
         transformedUserInput = getUserInput();
         input = transformedUserInput;
     }
-    console.log('!!!!!!!!!!user input: ' + transformedUserInput); // ??????
-    he1.textContent = transformedUserInput; // ????
     getLocationKey(input)
         .then(() => {
             getForcast(locationKey)
@@ -75,7 +72,6 @@ async function getLocationKey(input) {
             await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`);
         let obj = await promise.json();
         let firstLocationObj = obj[0];
-        he1.textContent = firstLocationObj['Key']; /// ???
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
     } catch (err) {
@@ -117,11 +113,9 @@ let eightHoursDiv = document.querySelector('div.eightHours');
 function createAndFillClickableDivs(arr) {
     // current date
     let dateNow = new Date(arr[0]['DateTime']);
-    console.log('date ' + dateNow)
     let convertedDate = dateNow.toDateString();
     let convertedDateSliced = convertedDate.slice(0,3) + ', ' + convertedDate.slice(4,10);
     currentDate.textContent = convertedDateSliced;
-    console.log('slice ' + convertedDateSliced);
 
     eightHoursDiv.textContent = '';
     // create divs
