@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="/img/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>Your Favourite Weather App</title>
 </head>
 <body class="text-white">
@@ -16,49 +17,90 @@
     
 
     <div class="currentDetails">
-        <h2 id="todayOrTomorrow">Today</h2>
+        <h2 class="h3" id="todayOrTomorrow">Today</h2>
         <h3 id="currentDate">current date plz no look</h3>
         <h1 id="currentTemperature"></h1>
-        <h2 id="cityAndCountry"></h2>
+        <h2 class="h3" id="cityAndCountry"></h2>
     </div>
 
     <div class="eightHours">
         
     </div>
-
-    <div class="weatherDetails">
-        <h2>Weather Details</h2>
-        <div class="weatherDetailDiv">
-            <h3>SUNRISE</h3>
-            <p id="paraSunrise"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>SUNSET</h3>
-            <p id="paraSunset"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>PRECIPITATION</h3>
-            <p id="paraPrecipitation"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>HUMIDITY</h3>
-            <p id="paraHumidity"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>WIND</h3>
-            <p id="paraWind"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>UV INDEX</h3>
-            <p id="paraUV"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>FEELS LIKE</h3>
-            <p id="paraFeelsLike"></p>
-        </div>
-        <div class="weatherDetailDiv">
-            <h3>VISIBILITY</h3>
-            <p id="paraVisibility"></p>
+    <div class="weatherDetails container">
+        <h2 class="h3">Weather Details</h2>
+        <div class="row row-cols-sm-2 row-cols-lg-4 gx-5 gy-3">
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                       <h3>SUNRISE</h3>
+                        <p id="paraSunrise"></p> 
+                    </div>
+                    <i class="bi bi-sunrise"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>SUNSET</h3>
+                        <p id="paraSunset"></p>
+                    </div>
+                    <i class="bi bi-sunset"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>PRECIPITATION</h3>
+                        <p id="paraPrecipitation"></p>
+                    </div>
+                    <i class="bi bi-droplet-fill"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>HUMIDITY</h3>
+                        <p id="paraHumidity"></p>
+                    </div>
+                    <i class="bi bi-moisture"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>WIND</h3>
+                        <p id="paraWind"></p>
+                    </div>
+                    <i class="bi bi-wind"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>UV INDEX</h3>
+                        <p id="paraUV"></p>
+                    </div>
+                    <i class="bi bi-brightness-low-fill"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>FEELS LIKE</h3>
+                        <p id="paraFeelsLike"></p>
+                    </div>
+                    <i class="bi bi-thermometer-half"></i>
+                </div>
+            </div>
+            <div class="col">
+                <div class="weatherDetailDiv">
+                    <div>
+                        <h3>VISIBILITY</h3>
+                        <p id="paraVisibility"></p>
+                    </div>
+                    <i class="bi bi-eye"></i>
+                </div>
+            </div>
         </div>
     </div>
     <footer>
