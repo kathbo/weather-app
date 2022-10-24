@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
@@ -142,6 +143,7 @@ function createAndFillClickableDivs(arr) {
     let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
     insideOuterDivs.forEach((div) => {
         div.addEventListener('click', () => {
+            body.style.cssText = 'background: none';
             displayedTime = div.id;
             changeDetails(displayedTime);
     })})
@@ -159,12 +161,27 @@ function changeDetails(timeFromNow) {
         }
     }
     currentTemerature.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
+    body.style.cssText = 'background: none';
+    setABackgroundColor(forecastArray[hourFromNow]['Temperature']['Value'])
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
     paraUV.textContent = forecastArray[hourFromNow]['UVIndexText'];
     paraFeelsLike.textContent = forecastArray[hourFromNow]['RealFeelTemperature']['Value'] + '°';
     paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
+}
+
+//CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
+function setABackgroundColor(temp) {
+    console.log(temp)
+    body.style.cssText = 'background: none';
+    if (temp < -15) body.style.cssText = 'linear-gradient(0deg, rgba(3,25,128,1) 30%, rgba(4,50,255,1) 100%);'
+    else if (-15 <= temp && temp < -0) body.style.cssText = 'background: linear-gradient(0deg, rgba(80,167,249,1) 0%, rgba(151,205,255,1) 100%); '
+    else if (0 <= temp && temp < 15) body.style.cssText = 'background: linear-gradient(0deg, rgba(1,253,255,1) 0%, rgba(231,255,255,1) 100%); '
+    else if (15 <= temp && temp < 20) body.style.cssText = 'background: linear-gradient(0deg, rgba(112,191,64,1) 0%, rgba(155,237,104,1) 100%); '
+    else if (20 <= temp && temp < 25) body.style.cssText = 'background: linear-gradient(0deg, rgba(245,211,40,1) 50%, rgba(241,223,133,1) 100%);'   
+    else if (25 <= temp && temp < 30) body.style.cssText = 'background: linear-gradient(0deg, rgba(223,106,16,1) 0%, rgba(236,174,127,1) 100%); '
+    else if (30 <= temp) body.style.cssText = 'background: linear-gradient(0deg, rgba(217,40,8,1) 0%, rgba(255,144,124,1) 100%);'
 }
 
 //FETCHING SUNSET & SUNRISE HOURS FROM A DIFFERENT API
