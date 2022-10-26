@@ -10934,4 +10934,33 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+body {
+  height: 100vh;
+  width: 100%;
+  background: pink;
+}
+
+div.weatherDetailDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+div.weatherDetailDiv div h3, div.weatherDetailDiv div .h3 {
+  font-size: 1.3em;
+}
+div.weatherDetailDiv i {
+  font-size: 2em;
+}
+
+footer {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 50%;
+  right: 0%;
+  transform: translate(25%, -50%);
+}
+footer p {
+  transform: rotate(-90deg);
 }/*# sourceMappingURL=style.css.map */
