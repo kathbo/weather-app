@@ -10,10 +10,13 @@
     <title>Your Favourite Weather App</title>
 </head>
 <body class="text-white">
-    <form action="" onsubmit="return false">
-        <input id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required>
-        <button id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
-    </form>
+    <div class="container mt-3">
+       <form class='input-group w-75' action="" onsubmit="return false">
+            <input class="form-control border text-white" id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required style="background: transparent">
+            <button class='btn btn-light' id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
+        </form> 
+    </div>
+    
     
 
     <div class="currentDetails">
