@@ -1,3 +1,5 @@
+
+
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
@@ -6,6 +8,9 @@ body {
     background: pink; // ?????
 }
 
+input::placeholder {
+    color: white !important;
+}
 
 div.weatherDetailDiv {
     display: flex;
