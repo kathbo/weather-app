@@ -41,7 +41,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('berlin');
+    executeProgram('iceland');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -173,7 +173,6 @@ function changeDetails(timeFromNow) {
 
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
 function setABackgroundColor(temp) {
-    console.log(temp)
     body.style.cssText = 'background: none';
     if (temp < -15) body.style.cssText = 'background: linear-gradient(0deg, rgba(3,25,128,1) 0%, rgba(4,50,255,1) 100%);'
     else if (-15 <= temp && temp < -0) body.style.cssText = 'background: linear-gradient(0deg, rgba(60,125,186,1) 0%, rgba(80,167,249,1) 100%); '
