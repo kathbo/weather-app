@@ -1,4 +1,4 @@
-
+$breakpoint-smToMd: 576px;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -10,6 +10,28 @@ body {
 
 input::placeholder {
     color: white !important;
+}
+
+#currentIcon {
+    font-size: 2.5em;
+    
+}
+
+.insideOuterDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #3a3b3c6d;
+    min-width: 3em;
+    //height: 100%;
+    min-height: 5em;
+    border-radius: 30px;
+    i {
+        font-size: 1.4em;
+    }
+    p {
+        opacity: 0.7;
+    }
 }
 
 div.weatherDetailDiv {
@@ -36,4 +58,8 @@ footer {
     p {
         transform: rotate(-90deg);
     }
+}
+
+@media (max-width: $breakpoint-smToMd) {
+    
 }
