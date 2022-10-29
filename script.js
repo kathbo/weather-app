@@ -150,7 +150,7 @@ function createAndFillClickableDivs(arr) {
 }
 
 //MANIPULATING WEATHER DETAILS
-function changeDetails(timeFromNow) {
+function changeDetails(timeFromNow) { //
     let hourFromNow = Number(timeFromNow[0]);
     let hoursFromMidnight = todayOrTomorrow();
     if (hoursFromMidnight != -1) {
@@ -170,6 +170,87 @@ function changeDetails(timeFromNow) {
     paraFeelsLike.textContent = forecastArray[hourFromNow]['RealFeelTemperature']['Value'] + '°';
     paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
 }
+
+function pickAWeatherIconClass(fetchedIconNumber) {
+    switch (fetchedIconNumber) {
+        case 1:
+        case 2:
+        case 3:
+            return 'bi-sun'
+            break;
+        case 4:
+        case 5:
+        case 6:
+            return 'bi-cloud-sun'
+            break;
+        case 7:
+        case 8:
+            return 'bi-clouds'
+            break;
+        case 11: 
+            return 'bi-cloud-fog'
+            break;
+        case 12:
+        case 13:
+        case 14:
+        case 18:
+        case 39:
+        case 40:
+            return 'bi-cloud-rain'
+            break;
+        case 15:
+        case 16:
+        case 17:
+        case 41:
+        case 42:
+            return 'bi-cloud-lightning-rain'
+            break;
+        case 19:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 43:
+        case 44:
+            return 'bi-cloud-snow'
+            break;
+        case 24:
+        case 25:
+            return 'bi-snow'
+            break;
+        case 26:
+        case 29:
+            return 'bi-cloud-hail'
+            break;
+        case 32:
+            return 'bi-wind'
+            break;
+        case 33:
+        case 34:
+        case 35:
+            return 'bi-moon'
+            break;
+        case 36:
+        case 37:
+        case 38:
+            return 'bi-cloud-moon'
+            break;
+    }
+}
+
+// 
+function pickAWeatherIconClass(fetchedIconNumber) {
+    if (1 <= fetchedIconNumber && fetchedIconNumber <= 3) return ;
+    else if (4 <= fetchedIconNumber && fetchedIconNumber <= 6) ;
+    else if (7 <= fetchedIconNumber && fetchedIconNumber <= 8) ;
+    else if (fetchedIconNumber === 11) ;
+    else if (12 <= fetchedIconNumber && fetchedIconNumber <= 14 || 36 <= fetchedIconNumber && fetchedIconNumber <= 40) ;
+    else if (12 <= fetchedIconNumber && fetchedIconNumber <= 14 || 36 <= fetchedIconNumber && fetchedIconNumber <= 40) ;
+    else if (19 <= fetchedIconNumber && fetchedIconNumber <= 23 || 43 <= fetchedIconNumber && fetchedIconNumber <= 44) ;
+    else if (24 <= fetchedIconNumber && fetchedIconNumber <= 25) ;
+    else if (26 === fetchedIconNumber || fetchedIconNumber === 29) ;
+} 
+
 
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
 function setABackgroundColor(temp) {
