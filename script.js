@@ -3,7 +3,8 @@ const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
 const h2TodayOrTomorrow = document.getElementById('todayOrTomorrow');
-const currentTemerature = document.getElementById('currentTemperature')
+const currentTemerature = document.getElementById('currentTemperature');
+const currentIcon = document.getElementById('currentIcon');
 const cityAndCountry = document.getElementById('cityAndCountry');
 const currentDate = document.getElementById('currentDate');
 const insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
@@ -150,7 +151,7 @@ function createAndFillClickableDivs(arr) {
 }
 
 //MANIPULATING WEATHER DETAILS
-function changeDetails(timeFromNow) { //
+function changeDetails(timeFromNow) {
     let hourFromNow = Number(timeFromNow[0]);
     let hoursFromMidnight = todayOrTomorrow();
     if (hoursFromMidnight != -1) {
@@ -160,9 +161,19 @@ function changeDetails(timeFromNow) { //
             h2TodayOrTomorrow.textContent = 'Today'
         }
     }
+    let assingedIconNumber = forecastArray[hourFromNow]['WeatherIcon'];
+    let iconClass = pickAWeatherIconClass(assingedIconNumber);
+    //console.log(assingedIconNumber)
+    currentIcon.removeAttribute('class');
+    currentIcon.classList.add('bi');
+    currentIcon.classList.add(`${iconClass}`);
+    let toto = pickAWeatherIconClass(34)
+    console.log(toto)
+
+
     currentTemerature.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
     body.style.cssText = 'background: none';
-    setABackgroundColor(forecastArray[hourFromNow]['Temperature']['Value'])
+    setABackgroundColor(forecastArray[hourFromNow]['Temperature']['Value']);
     paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
@@ -235,21 +246,11 @@ function pickAWeatherIconClass(fetchedIconNumber) {
         case 38:
             return 'bi-cloud-moon'
             break;
+        default:
+            return 'error'
+            break;
     }
 }
-
-// 
-function pickAWeatherIconClass(fetchedIconNumber) {
-    if (1 <= fetchedIconNumber && fetchedIconNumber <= 3) return ;
-    else if (4 <= fetchedIconNumber && fetchedIconNumber <= 6) ;
-    else if (7 <= fetchedIconNumber && fetchedIconNumber <= 8) ;
-    else if (fetchedIconNumber === 11) ;
-    else if (12 <= fetchedIconNumber && fetchedIconNumber <= 14 || 36 <= fetchedIconNumber && fetchedIconNumber <= 40) ;
-    else if (12 <= fetchedIconNumber && fetchedIconNumber <= 14 || 36 <= fetchedIconNumber && fetchedIconNumber <= 40) ;
-    else if (19 <= fetchedIconNumber && fetchedIconNumber <= 23 || 43 <= fetchedIconNumber && fetchedIconNumber <= 44) ;
-    else if (24 <= fetchedIconNumber && fetchedIconNumber <= 25) ;
-    else if (26 === fetchedIconNumber || fetchedIconNumber === 29) ;
-} 
 
 
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
