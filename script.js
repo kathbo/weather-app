@@ -18,6 +18,8 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
+
+
 function executeProgram(input) {
     if (input === '') {
         transformedUserInput = getUserInput();
@@ -27,12 +29,17 @@ function executeProgram(input) {
         .then(() => {
             getForcast(locationKey)
             .then(() => {
-                createAndFillClickableDivs(forecastArray);
-                changeDetails('0');
-                getSunriseAndSunset();
+                createAndFillClickableDivs(fakeForecastArray);
+                changeDetails('0', fakeForecastArray);
+                // createAndFillClickableDivs(forecastArray);
+                // changeDetails('0');
+                // getSunriseAndSunset();
             })
             .catch(() => {
-                console.error('Array methods did not work')
+                console.error('The allowed number of requests has been exceeded. Displaying fake forcast.');
+                //changeDetails('0');
+                paraSunrise.textContent = '06:47 am';
+                paraSunset.textContent = '05:03 pm';
             })
         })
         .catch((err) => {
@@ -71,7 +78,7 @@ let locationKey = 'location key not working hoe';
 async function getLocationKey(input) {
     try {
         let promise = 
-            await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`);
+            await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`, {mode: 'cors'});
         let obj = await promise.json();
         let firstLocationObj = obj[0];
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
@@ -85,7 +92,7 @@ async function getLocationKey(input) {
 let forecastArray = [];
 async function getForcast(locationKey) {
     let forcastPromise = 
-        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`)
+        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`, {mode: 'cors'})
     let obj = await forcastPromise.json();
     if (forecastArray.length != 0) forecastArray = [];
     for (let x of obj) {
@@ -125,6 +132,8 @@ function createAndFillClickableDivs(arr) {
         // p that displays hours
         let outerDiv = document.createElement('div');
         outerDiv.classList.add('eightHoursChildDivs');
+        let icon = document.createElement('i');
+        displayWeatherIcon(arr, icon, x);
         let paraTime = document.createElement('p');
         paraTime.textContent = convertTwentyFourHourFormatToTwelve(arr[x]['DateTime'].substr(11,5));
         if (x === 0) paraTime.textContent = 'Now';
@@ -136,6 +145,7 @@ function createAndFillClickableDivs(arr) {
         let paraTemp = document.createElement('p');
         let temp = arr[x]['Temperature']['Value'];
         paraTemp.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°'; 
+        insideOuterDiv.appendChild(icon);
         insideOuterDiv.appendChild(paraTemp);
         outerDiv.appendChild(insideOuterDiv);
         eightHoursDiv.appendChild(outerDiv);
@@ -151,7 +161,7 @@ function createAndFillClickableDivs(arr) {
 }
 
 //MANIPULATING WEATHER DETAILS
-function changeDetails(timeFromNow) {
+function changeDetails(timeFromNow, arr) {
     let hourFromNow = Number(timeFromNow[0]);
     let hoursFromMidnight = todayOrTomorrow();
     if (hoursFromMidnight != -1) {
@@ -161,25 +171,24 @@ function changeDetails(timeFromNow) {
             h2TodayOrTomorrow.textContent = 'Today'
         }
     }
-    let assingedIconNumber = forecastArray[hourFromNow]['WeatherIcon'];
-    let iconClass = pickAWeatherIconClass(assingedIconNumber);
-    //console.log(assingedIconNumber)
-    currentIcon.removeAttribute('class');
-    currentIcon.classList.add('bi');
-    currentIcon.classList.add(`${iconClass}`);
-    let toto = pickAWeatherIconClass(34)
-    console.log(toto)
-
-
-    currentTemerature.textContent = forecastArray[hourFromNow]['Temperature']['Value'] + '°';
+    displayWeatherIcon(fakeForecastArray, currentIcon, hourFromNow);
+    currentTemerature.textContent = arr[hourFromNow]['Temperature']['Value'] + '°';
     body.style.cssText = 'background: none';
-    setABackgroundColor(forecastArray[hourFromNow]['Temperature']['Value']);
-    paraPrecipitation.textContent = forecastArray[hourFromNow]['PrecipitationProbability'] + '%';
-    paraHumidity.textContent = forecastArray[hourFromNow]['RelativeHumidity'] + '%';
-    paraWind.textContent = forecastArray[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
-    paraUV.textContent = forecastArray[hourFromNow]['UVIndexText'];
-    paraFeelsLike.textContent = forecastArray[hourFromNow]['RealFeelTemperature']['Value'] + '°';
-    paraVisibility.textContent = forecastArray[hourFromNow]['Visibility']['Value'] + ' km';
+    setABackgroundColor(arr[hourFromNow]['Temperature']['Value']);
+    paraPrecipitation.textContent = arr[hourFromNow]['PrecipitationProbability'] + '%';
+    paraHumidity.textContent = arr[hourFromNow]['RelativeHumidity'] + '%';
+    paraWind.textContent = arr[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
+    paraUV.textContent = arr[hourFromNow]['UVIndexText'];
+    paraFeelsLike.textContent = arr[hourFromNow]['RealFeelTemperature']['Value'] + '°';
+    paraVisibility.textContent = arr[hourFromNow]['Visibility']['Value'] + ' km';
+}
+
+function displayWeatherIcon(arr, el, index) {
+    el.removeAttribute('class');
+    el.classList.add('bi');
+    let assingedIconNumber = arr[index]['WeatherIcon'];
+    let iconClass = pickAWeatherIconClass(assingedIconNumber);
+    el.classList.add(`${iconClass}`);
 }
 
 function pickAWeatherIconClass(fetchedIconNumber) {
@@ -252,7 +261,6 @@ function pickAWeatherIconClass(fetchedIconNumber) {
     }
 }
 
-
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
 function setABackgroundColor(temp) {
     body.style.cssText = 'background: none';
@@ -268,12 +276,103 @@ function setABackgroundColor(temp) {
 //FETCHING SUNSET & SUNRISE HOURS FROM A DIFFERENT API
 async function getSunriseAndSunset() {
     let promise = 
-        await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`);
+        await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`, {mode: 'cors'});
     let obj = await promise.json();
     let sunObj = obj['DailyForecasts'][0]['Sun'];
     paraSunrise.textContent = sunObj['Rise'].substr(11,5);
     paraSunset.textContent = sunObj['Set'].substr(11,5);
 }
+
+const fakeForecastArray = [
+    {
+        WeatherIcon: 8,
+        DateTime:'2022-10-30T09:00:00-07:00',
+        Temperature: {Value: 26},
+        PrecipitationProbability: 60,
+        RelativeHumidity: 54,
+        Wind: {Speed: {Value: 5.7}},
+        UVIndexText: 'Moderate',
+        RealFeelTemperature: {Value: 21.3},
+        Visibility: {Value: 16.1}
+    },
+    {
+        WeatherIcon: 11,
+        DateTime:'2022-10-30T10:00:00-07:00',
+        Temperature: {Value: 25},
+        PrecipitationProbability: 47,
+        RelativeHumidity: 54,
+        Wind: {Speed: {Value: 8.1}},
+        UVIndexText: 'Low',
+        RealFeelTemperature: {Value: 24.9},
+        Visibility: {Value: 13.9}
+    },
+    {
+        WeatherIcon: 8,
+        DateTime:'2022-10-30T11:00:00-07:00',
+        Temperature: {Value: 24},
+        PrecipitationProbability: 63,
+        RelativeHumidity: 54,
+        Wind: {Speed: {Value: 6.2}},
+        UVIndexText: 'Low',
+        RealFeelTemperature: {Value: 25.1},
+        Visibility: {Value: 17.3}
+    },
+    {
+        WeatherIcon: 40,
+        DateTime:'2022-10-30T12:00:00-07:00',
+        Temperature: {Value: 23},
+        PrecipitationProbability: 100,
+        RelativeHumidity: 58,
+        Wind: {Speed: {Value: 5.7}},
+        UVIndexText: 'Low',
+        RealFeelTemperature: {Value: 22.4},
+        Visibility: {Value: 12.6}
+    },
+    {
+        WeatherIcon: 40,
+        DateTime:'2022-10-30T13:00:00-07:00',
+        Temperature: {Value: 22},
+        PrecipitationProbability: 100,
+        RelativeHumidity: 61,
+        Wind: {Speed: {Value: 3.9}},
+        UVIndexText: 'Low',
+        RealFeelTemperature: {Value: 24.7},
+        Visibility: {Value: 12.5}
+    },
+    {
+        WeatherIcon: 15,
+        DateTime:'2022-10-30T14:00:00-07:00',
+        Temperature: {Value: 21},
+        PrecipitationProbability: 79,
+        RelativeHumidity: 64,
+        Wind: {Speed: {Value: 15.6}},
+        UVIndexText: 'Low',
+        RealFeelTemperature: {Value: 20.3},
+        Visibility: {Value: 9.9}
+    },
+    {
+        WeatherIcon: 7,
+        DateTime:'2022-10-30T15:00:00-07:00',
+        Temperature: {Value: 20},
+        PrecipitationProbability: 32,
+        RelativeHumidity: 59,
+        Wind: {Speed: {Value: 14.5}},
+        UVIndexText: 'Moderate',
+        RealFeelTemperature: {Value: 21.3},
+        Visibility: {Value: 14.0}
+    },
+    {
+        WeatherIcon: 4,
+        DateTime:'2022-10-30T16:00:00-07:00',
+        Temperature: {Value: 19},
+        PrecipitationProbability: 11,
+        RelativeHumidity: 52,
+        Wind: {Speed: {Value: 2.6}},
+        UVIndexText: 'High',
+        RealFeelTemperature: {Value: 20.3},
+        Visibility: {Value: 19.6}
+    }
+];
 
 // PROMISE CHECKER
 function isPromise(p) {
