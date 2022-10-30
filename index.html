@@ -10,14 +10,15 @@
     <title>Your Favourite Weather App</title>
 </head>
 <body class="text-white container">
-    <div class="formDiv mt-3 mb-4">
+
+    <div class="formDiv mt-3">
        <form class='input-group w-75' action="" onsubmit="return false">
             <input class="form-control border text-white" id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required style="background: transparent">
             <button class='btn btn-light' id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
         </form> 
     </div>
     
-    <div class="row mb-4">
+    <div class="row my-4">
         <div class="currentDetails mb-3 text-center col-lg-4 col-xl-5">
             <div class='d-flex justify-content-center'>
                 <div class="pe-3">
@@ -65,7 +66,7 @@
                         <h3>PRECIPITATION</h3>
                         <p id="paraPrecipitation"></p>
                     </div>
-                    <i class="bi bi-droplet-fill"></i>
+                    <i class="bi bi-droplet"></i>
                 </div>
             </div>
             <div class="col">
