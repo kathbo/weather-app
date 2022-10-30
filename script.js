@@ -44,16 +44,9 @@ function executeProgram(input) {
         });
 }
 
-function whenLimitHasExceeded() {
-    paraSunrise.textContent = '06:47 am';
-    paraSunset.textContent = '05:03 pm';
-    createAndFillClickableDivs(fakeForecastArray);
-    changeDetails('0', fakeForecastArray);
-}
-
 window.onload = () => {
     textInput.value = ''
-    executeProgram('iceland');
+    executeProgram('los angeles');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -176,7 +169,8 @@ function changeDetails(timeFromNow, arr) {
         }
     }
     displayWeatherIcon(arr, currentIcon, hourFromNow);
-    currentTemerature.textContent = arr[hourFromNow]['Temperature']['Value'] + '°';
+    let temp = arr[hourFromNow]['Temperature']['Value'];
+    currentTemerature.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°';
     body.style.cssText = 'background: none';
     setABackgroundColor(arr[hourFromNow]['Temperature']['Value']);
     paraPrecipitation.textContent = arr[hourFromNow]['PrecipitationProbability'] + '%';
@@ -286,6 +280,14 @@ async function getSunriseAndSunset() {
     paraSunrise.textContent = sunObj['Rise'].substr(11,5);
     paraSunset.textContent = sunObj['Set'].substr(11,5);
 }
+
+function whenLimitHasExceeded() {
+    paraSunrise.textContent = '06:47 am';
+    paraSunset.textContent = '05:03 pm';
+    createAndFillClickableDivs(fakeForecastArray);
+    changeDetails('0', fakeForecastArray);
+}
+
 
 const fakeForecastArray = [
     {
