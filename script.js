@@ -29,23 +29,22 @@ function executeProgram(input) {
         .then(() => {
             getForcast(locationKey)
             .then(() => {
-                whenLimitHasExceed();
-                // createAndFillClickableDivs(forecastArray);
-                // changeDetails('0');
-                // getSunriseAndSunset();
+                createAndFillClickableDivs(forecastArray);
+                changeDetails('0', forecastArray);
+                getSunriseAndSunset();
             })
             .catch(() => {
                 console.error('The allowed number of requests has been exceeded. Displaying fake forcast.');
-                //changeDetails('0');
-            
+                whenLimitHasExceeded();
             })
         })
         .catch((err) => {
-            console.error(err + 'getForcast() did not exectute properly')
+            console.error(err + 'getForcast() did not exectute properly');
+            //whenLimitHasExceeded();
         });
 }
 
-function whenLimitHasExceed() {
+function whenLimitHasExceeded() {
     paraSunrise.textContent = '06:47 am';
     paraSunset.textContent = '05:03 pm';
     createAndFillClickableDivs(fakeForecastArray);
@@ -176,7 +175,7 @@ function changeDetails(timeFromNow, arr) {
             h2TodayOrTomorrow.textContent = 'Today'
         }
     }
-    displayWeatherIcon(fakeForecastArray, currentIcon, hourFromNow);
+    displayWeatherIcon(arr, currentIcon, hourFromNow);
     currentTemerature.textContent = arr[hourFromNow]['Temperature']['Value'] + '°';
     body.style.cssText = 'background: none';
     setABackgroundColor(arr[hourFromNow]['Temperature']['Value']);
