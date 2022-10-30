@@ -7,43 +7,45 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet"> 
     <title>Your Favourite Weather App</title>
 </head>
-<body class="text-white container">
+<body class="text-white container my-3">
 
-    <div class="formDiv mt-3">
+    <div class="formDiv">
        <form class='input-group w-75' action="" onsubmit="return false">
             <input class="form-control border text-white" id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required style="background: transparent">
             <button class='btn btn-light' id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
         </form> 
     </div>
     
-    <div class="row my-4">
+    <div class="currentAnd8h row my-4">
         <div class="currentDetails mb-3 text-center col-lg-4 col-xl-5">
             <div class='d-flex justify-content-center'>
                 <div class="pe-3">
                     <h2 class="h3 mb-0" id="todayOrTomorrow">Today</h2>
-                    <h5 class='mb-0' id="currentDate">current date plz no look</h5>
+                    <h5 class='h6 mb-0' id="currentDate">current date</h5>
                 </div>
                 <i id="currentIcon"></i>
             </div>
-            <h1 class='display-3 py-2' id="currentTemperature"></h1>
+            <h1 class='display-3 fw-bold py-2' id="currentTemperature"></h1>
             <div>
                 <i class="bi bi-geo-alt-fill d-inline-block h5 pe-2"></i>
                 <h2 class="h4 d-inline-block" id="cityAndCountry"></h2>
             </div>
         </div>
         <div class="eightHours d-flex justify-content-between align-items-center text-center col-lg-8 col-xl-7">
-        
         </div>
     </div>
 
 
     <div class="weatherDetails border-top border-light">
-        <h3 class="mt-4">Weather Details</h3>
-        <div class="row row-cols-2 row-cols-lg-4 gx-5 gy-3">
+        <h3 class="my-4">Weather Details</h3>
+        <div class="row row-cols-2 row-cols-lg-4 gx-4 gy-4">
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                        <h3>SUNRISE</h3>
                         <p id="paraSunrise"></p> 
@@ -52,7 +54,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>SUNSET</h3>
                         <p id="paraSunset"></p>
@@ -61,7 +63,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>PRECIPITATION</h3>
                         <p id="paraPrecipitation"></p>
@@ -70,7 +72,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>HUMIDITY</h3>
                         <p id="paraHumidity"></p>
@@ -79,7 +81,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>WIND</h3>
                         <p id="paraWind"></p>
@@ -88,7 +90,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>UV INDEX</h3>
                         <p id="paraUV"></p>
@@ -97,7 +99,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>FEELS LIKE</h3>
                         <p id="paraFeelsLike"></p>
@@ -106,7 +108,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="weatherDetailDiv">
+                <div class="weatherDetailDiv shadow">
                     <div>
                         <h3>VISIBILITY</h3>
                         <p id="paraVisibility"></p>
