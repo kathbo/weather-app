@@ -1,5 +1,5 @@
 $breakpoint-sm: 576px;
-$breakpoint-lg: 960px;
+$breakpoint-lg: 992px;
 $breakpoint-xxl: 1400px;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -12,25 +12,27 @@ body {
     height:100%;
     font-family: 'Inter', sans-serif;
 }
+
 div.formDiv {
     margin-bottom: 2em;
+    form {
+        input::placeholder {
+            color: white !important;
+        }
+    }
 }
 
-input::placeholder {
-    color: white !important;
-}
-
-#currentIcon {
+i#currentIcon {
     font-size: 2.5em;
     
 }
-.eightHoursChildDivs {
+
+div.eightHoursChildDivs {
     p {
         margin-bottom: 0.4em;
         font-weight: 500;
     }
-}
-div.insideOuterDiv {
+    div.insideOuterDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,13 +40,11 @@ div.insideOuterDiv {
     min-width: 3em;
     min-height: 5em;
     border-radius: 30px;
-    i {
-        font-size: 1.4em;
-    }
-    p {
-        opacity: 0.7;
+    i {font-size: 1.4em;}
+    p {opacity: 0.7;}
     }
 }
+
 div.weatherDetailDiv {
     background-color: #ffffffde;
     color: #223f43;
@@ -52,7 +52,6 @@ div.weatherDetailDiv {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
     div {
         h3 {
             font-size: 1em;
@@ -69,7 +68,6 @@ div.weatherDetailDiv {
         color: #373737e3;
     }
 }
-
 
 
 @media (max-width: $breakpoint-sm) {
@@ -91,7 +89,8 @@ div.weatherDetailDiv {
     p {transform: rotate(-90deg);}
     }
 }
-@media (min-width: 992px) {
+
+@media (min-width: $breakpoint-lg) {
     body {
         width: 100%;
     }
@@ -100,8 +99,8 @@ div.weatherDetailDiv {
         margin-bottom: 4em;
     }
     div.insideOuterDiv {
-        min-width: 3.5em;
-        min-height: 6em;
+        min-width: 3.5em !important;
+        min-height: 6em !important;
     }
     div.currentAnd8h {
         margin: 6em 0 !important;
