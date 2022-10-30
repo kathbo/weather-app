@@ -29,8 +29,7 @@ function executeProgram(input) {
         .then(() => {
             getForcast(locationKey)
             .then(() => {
-                createAndFillClickableDivs(fakeForecastArray);
-                changeDetails('0', fakeForecastArray);
+                whenLimitHasExceed();
                 // createAndFillClickableDivs(forecastArray);
                 // changeDetails('0');
                 // getSunriseAndSunset();
@@ -38,13 +37,19 @@ function executeProgram(input) {
             .catch(() => {
                 console.error('The allowed number of requests has been exceeded. Displaying fake forcast.');
                 //changeDetails('0');
-                paraSunrise.textContent = '06:47 am';
-                paraSunset.textContent = '05:03 pm';
+            
             })
         })
         .catch((err) => {
             console.error(err + 'getForcast() did not exectute properly')
         });
+}
+
+function whenLimitHasExceed() {
+    paraSunrise.textContent = '06:47 am';
+    paraSunset.textContent = '05:03 pm';
+    createAndFillClickableDivs(fakeForecastArray);
+    changeDetails('0', fakeForecastArray);
 }
 
 window.onload = () => {
@@ -156,7 +161,7 @@ function createAndFillClickableDivs(arr) {
         div.addEventListener('click', () => {
             body.style.cssText = 'background: none';
             displayedTime = div.id;
-            changeDetails(displayedTime);
+            changeDetails(displayedTime, arr);
     })})
 }
 
