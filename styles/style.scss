@@ -4,9 +4,13 @@ $breakpoint-xxl: 1400px;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+html {
+    min-height:100%;
+}
+
 body {
+    height:100%;
     font-family: 'Inter', sans-serif;
-    //font-family: 'Playfair Display', serif;
 }
 div.formDiv {
     margin-bottom: 2em;
@@ -89,7 +93,6 @@ div.weatherDetailDiv {
 }
 @media (min-width: 992px) {
     body {
-        height: 100vh;
         width: 100%;
     }
 
