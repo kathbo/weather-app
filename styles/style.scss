@@ -70,6 +70,19 @@ div.weatherDetailDiv {
     }
 }
 
+footer {
+    p {
+        font-weight: 500;
+        a {
+            color: $blue-500;
+            &:hover {
+                color: $blue-600;
+                transition: color .1s ease-in;
+            }
+        }
+    }
+}
+
 @media (min-width: $widthWhereGridWillStart) and (max-width: $breakpoint-lg){
     div.weatherDetailsGrid {
         .col {
