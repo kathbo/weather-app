@@ -1,3 +1,4 @@
+$widthWhereGridWillStart: 485px;
 $breakpoint-sm: 576px;
 $breakpoint-lg: 992px;
 $breakpoint-xxl: 1400px;
@@ -9,7 +10,7 @@ html {
 }
 
 body {
-    height:100%;
+    height: 100%;
     font-family: 'Inter', sans-serif;
 }
 
@@ -69,6 +70,15 @@ div.weatherDetailDiv {
     }
 }
 
+@media (min-width: $widthWhereGridWillStart) and (max-width: $breakpoint-lg){
+    div.weatherDetailsGrid {
+        .col {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+    }
+    
+}
 
 @media (max-width: $breakpoint-sm) {
     div.eightHours {
