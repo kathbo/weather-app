@@ -46,7 +46,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('los angeles');
+    executeProgram('berlin');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -262,13 +262,16 @@ function pickAWeatherIconClass(fetchedIconNumber) {
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
 function setABackgroundColor(temp) {
     body.style.cssText = 'background: none';
-    if (temp < -15) body.style.cssText = 'background: linear-gradient(0deg, rgba(3,25,128,1) 0%, rgba(4,50,255,1) 100%);'
-    else if (-15 <= temp && temp < -0) body.style.cssText = 'background: linear-gradient(0deg, rgba(60,125,186,1) 0%, rgba(80,167,249,1) 100%); '
-    else if (0 <= temp && temp < 15) body.style.cssText = 'background: linear-gradient(0deg, rgba(0,191,191,1) 0%, rgba(1,253,255,1) 100%); '
-    else if (15 <= temp && temp < 20) body.style.cssText = 'background: linear-gradient(0deg, rgba(83,140,48,1) 0%, rgba(112,191,64,1) 100%); '
-    else if (20 <= temp && temp < 25) body.style.cssText = 'background: linear-gradient(0deg, rgba(219,189,35,1) 0%, rgba(245,211,40,1) 100%);'  
-    else if (25 <= temp && temp < 30) body.style.cssText = 'background: linear-gradient(0deg, rgba(196,93,14,1) 0%, rgba(235,111,16,1) 100%); '
-    else if (30 <= temp) body.style.cssText = 'background: linear-gradient(0deg, rgba(153,28,6,1) 0%, rgba(217,40,8,1) 100%);'
+    if (temp < -10) body.style.cssText = 'background: linear-gradient(180deg, rgba(4,50,255,1) 0%, rgba(255,84,31,1) 100%);'
+    else if (-10 <= temp && temp < -5) body.style.cssText = 'background: linear-gradient(180deg, rgba(28,155,142,1) 0%, rgba(156,44,145,1) 100%); '
+    else if (-5 <= temp && temp < 0) body.style.cssText = 'background: linear-gradient(180deg, rgba(80,167,249,1) 0%, rgba(250,113,105,1) 100%); '
+    else if (0 <= temp && temp < 5) body.style.cssText = 'background: linear-gradient(180deg, rgba(4,211,188,1) 0%, rgba(212,25,200,1) 100%); '
+    else if (5 <= temp && temp < 10) body.style.cssText = 'background: linear-gradient(180deg, rgba(112,191,64,1) 0%, rgba(84,96,191,1) 100%);'
+    else if (10 <= temp && temp < 15) body.style.cssText = 'background: linear-gradient(180deg, rgba(2,137,75,1) 0%, rgba(138,31,15,1) 100%);'
+    else if (15 <= temp && temp < 20) body.style.cssText = 'background: linear-gradient(180deg, rgba(245,211,40,1) 0%, rgba(245,15,190,1) 100%);'
+    else if (20 <= temp && temp < 25) body.style.cssText = 'background: linear-gradient(180deg, rgba(255,131,0,1) 0%, rgba(0,187,255,1) 100%);'
+    else if (25 <= temp && temp < 30) body.style.cssText = 'background: linear-gradient(180deg, rgba(234,109,93,1) 0%, rgba(102,82,235,1) 100%);'  
+    else if (30 <= temp) body.style.cssText = 'background: linear-gradient(180deg, rgba(252,46,32,1) 0%, rgba(252,220,58,1) 100%);'
 }
 
 //FETCHING SUNSET & SUNRISE HOURS FROM A DIFFERENT API
