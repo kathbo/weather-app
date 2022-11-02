@@ -46,7 +46,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('new york');
+    executeProgram('berlin');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -154,7 +154,17 @@ function createAndFillClickableDivs(arr) {
             body.style.cssText = 'background: none';
             displayedTime = div.id;
             changeDetails(displayedTime, arr);
+            changeColorsOfAClickedDiv(insideOuterDivs, div)
+            //console.log(div.getAttribute('class').includes('clickedDiv'))
+
     })})
+}
+
+function changeColorsOfAClickedDiv(els, el) {
+    els.forEach(div => {
+        div.classList.remove('clickedDiv')
+    });    
+    el.classList.add('clickedDiv');
 }
 
 //MANIPULATING WEATHER DETAILS
