@@ -46,7 +46,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('berlin');
+    executeProgram('new york');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -172,7 +172,7 @@ function changeDetails(timeFromNow, arr) {
     let temp = arr[hourFromNow]['Temperature']['Value'];
     currentTemerature.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°';
     body.style.cssText = 'background: none';
-    setABackgroundColor(arr[hourFromNow]['Temperature']['Value']);
+    setABackgroundColor(temp);
     paraPrecipitation.textContent = arr[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = arr[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = arr[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
