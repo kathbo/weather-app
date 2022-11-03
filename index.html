@@ -14,13 +14,16 @@
 </head>
 <body class="text-white container my-3">
 
-    <div class="formDiv">
-       <form class='input-group w-75' action="" onsubmit="return false">
-            <input class="form-control border text-white" id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required style="background: transparent">
-            <button class='btn btn-light' id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
-        </form> 
+    <div class="upperRow row">
+        <div class="formDiv col-9 col-sm-10 col-lg-11 p-0 pe-2">
+           <form class='input-group' action="" onsubmit="return false">
+                <input class="form-control border text-white" id="textInput" type="text" maxlength='20' placeholder="E.g. Montreal" required style="background: transparent">
+                <button class='btn btn-light' id='submitInput' type="submit" onclick="executeProgram('')"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+        <button id='celciusOrFarenheit' class="col btn btn-light"><span>C</span> / <span>F</span></button>
     </div>
-    
+
     <div class="currentAnd8h row my-4">
         <div class="currentDetails mb-3 text-center col-lg-4 col-xl-5">
             <div class='d-flex justify-content-center'>
