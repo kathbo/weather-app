@@ -81,7 +81,11 @@ async function getLocationKey(input) {
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
         locationKey = firstLocationObj['Key'];
     } catch (err) {
-        alert('Entered city does not exist.');
+        if (err.message === 'obj is null') {
+           alert('Enter a city first')
+        } else {
+            alert('Entered city does not exist')
+        } 
     }    
 }
 
