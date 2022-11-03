@@ -6,7 +6,7 @@ $breakpoint-xxl: 1400px;
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 html {
-    min-height:100%;
+    min-height: 100%;
 }
 
 body {
@@ -14,12 +14,23 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.upperRow {
+    padding: 0.5em;
+    margin-bottom: 3em;
+}
+
 div.formDiv {
-    margin-bottom: 2em;
+    margin-bottom: 0em !important;
     form {
         input::placeholder {
             color: white !important;
         }
+    }
+}
+
+button#celciusOrFarenheit {
+    span {
+        color: $gray-500;
     }
 }
 
@@ -44,6 +55,18 @@ div.eightHoursChildDivs {
     i {font-size: 1.4em;}
     p {opacity: 0.7;}
     }
+}
+
+.clickedDiv {
+    transition: .1s ease-in;
+    background-color: rgba(255, 255, 255, 0.43) !important;
+    color: #202020;
+}
+
+.unclickedDiv {
+    transition: .1s ease-in;
+    background-color: rgba(58, 59, 60, 0.4274509804) !important;
+    color: white;
 }
 
 div.weatherDetailDiv {
@@ -102,6 +125,9 @@ footer {
     }
 }
 @media (min-width: $breakpoint-sm) {
+    form {
+        width: 85% !important;
+    }
     footer {
     margin: 0;
     padding: 0;
