@@ -154,13 +154,9 @@ function createAndFillClickableDivs(arr) {
             body.style.cssText = 'background: none';
             displayedTime = div.id;
             changeDetails(displayedTime, arr);
-            if (div.getAttribute('class').includes('clickedDiv')) {
-                div.classList.remove('clickedDiv');
-                changeDetails('0', arr)
-            }
-            changeColorsOfAClickedDiv(insideOuterDivs, div)
-
-    })})
+            changeColorsOfAClickedDiv(div, insideOuterDivs, arr);
+        })
+    })
 }
 
 //MANIPULATING WEATHER DETAILS
@@ -265,11 +261,18 @@ function pickAWeatherIconClass(fetchedIconNumber) {
     }
 }
 
-function changeColorsOfAClickedDiv(els, el) {
-    els.forEach(div => {
-        div.classList.remove('clickedDiv')
-    });    
-    el.classList.add('clickedDiv');
+function changeColorsOfAClickedDiv(el, els, arr) {
+    if (el.classList.contains('clickedDiv')) {
+        el.classList.remove('clickedDiv');
+        changeDetails('0', arr);
+        el.classList.add('unclickedDiv');
+    } else {
+        els.forEach(div => {
+            div.classList.remove('clickedDiv');
+            div.classList.remove('unclickedDiv');
+        });    
+        el.classList.add('clickedDiv');
+    }
 }
 
 //CHANGING A BACKGROUND COLOR DEPENDING ON A TEMPERATURE
