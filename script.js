@@ -18,8 +18,40 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
+let activeDegreeScale = 'C';
+const activeDegreeButton = document.getElementById('celciusOrFarenheit');
 
+activeDegreeButton.addEventListener('click', () => {
+    if (activeDegreeScale === 'C') {
+        activeDegreeScale = 'F';
+        convertCtoF()
+    } 
+    else if (activeDegreeScale === 'F') {
 
+    }
+})
+function convertCtoF() {
+    currentTemerature.textContent = CtoF(removeDegreesAndConvertToNum(currentTemerature)) + '°';
+    insideOuterDivs.forEach((div) => {
+        let para = document
+
+    })
+    paraFeelsLike.textContent = CtoF(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
+}
+
+let CtoF = function (temp) {
+    let newTemp = temp * 9/5 + 32;
+    return Math.round(newTemp * 10) / 10;
+}
+
+let FtoC = function (temp) {
+    let newTemp = (temp - 32) * 5/9;
+    return Math.round(newTemp * 10) / 10;
+}
+
+function removeDegreesAndConvertToNum(el) {
+    return +el.textContent.replace('°', '');
+}
 function executeProgram(input) {
     if (input === '') {
         transformedUserInput = getUserInput();
