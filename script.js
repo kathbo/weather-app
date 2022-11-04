@@ -1,7 +1,13 @@
 const body = document.querySelector('body');
+// input section:
 const textInput = document.getElementById('textInput');
 const submitInput = document.getElementById('submitInput');
 const btn = document.querySelector('button');
+// temperature scale change section:
+const activeDegreeButton = document.getElementById('celciusOrFarenheit');
+const spanC = document.getElementById('spanC');
+const spanF = document.getElementById('spanF');
+// main section:
 const h2TodayOrTomorrow = document.getElementById('todayOrTomorrow');
 const currentTemerature = document.getElementById('currentTemperature');
 const currentIcon = document.getElementById('currentIcon');
@@ -18,71 +24,6 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
-const activeDegreeButton = document.getElementById('celciusOrFarenheit');
-const spanC = document.getElementById('spanC');
-const spanF = document.getElementById('spanF');
-
-let activeDegreeScale = 'C';
-spanC.classList.add('text-info');
-
-activeDegreeButton.addEventListener('click', () => {
-    if (activeDegreeScale === 'C') {
-        activeDegreeScale = 'F';
-        //convertCtoF();
-        convert(CtoF)
-
-        spanC.classList.remove('text-info');
-        spanF.classList.add('text-info');
-    } 
-    else if (activeDegreeScale === 'F') {
-        activeDegreeScale = 'C';
-        //convertFtoC();
-        convert(FtoC)
-
-        spanF.classList.remove('text-info');
-        spanC.classList.add('text-info');
-    }
-})
-function convertCtoF() {
-    currentTemerature.textContent = CtoF(removeDegreesAndConvertToNum(currentTemerature)) + '°';
-    let para = document.querySelectorAll('p.paraTemp8Hs');
-    para.forEach((p) => {
-        p.textContent = CtoF(removeDegreesAndConvertToNum(p)) + '°';
-    })
-    paraFeelsLike.textContent = CtoF(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
-}
-
-function convertFtoC() {
-    currentTemerature.textContent = FtoC(removeDegreesAndConvertToNum(currentTemerature)) + '°';
-    let para = document.querySelectorAll('p.paraTemp8Hs');
-    para.forEach((p) => {
-        p.textContent = FtoC(removeDegreesAndConvertToNum(p)) + '°';
-    })
-    paraFeelsLike.textContent = FtoC(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
-}
-
-function convert(scaleToScale) {
-    currentTemerature.textContent = scaleToScale(removeDegreesAndConvertToNum(currentTemerature)) + '°';
-    let para = document.querySelectorAll('p.paraTemp8Hs');
-    para.forEach((p) => {
-        p.textContent = scaleToScale(removeDegreesAndConvertToNum(p)) + '°';
-    })
-    paraFeelsLike.textContent = scaleToScale(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
-}
-
-let CtoF = function (temp) {
-    let newTemp = temp * 9/5 + 32;
-    return Math.round(newTemp * 10) / 10;
-}
-
-let FtoC = function (temp) {
-    let newTemp = (temp - 32) * 5/9;
-    return Math.round(newTemp * 10) / 10;
-}
-
-function removeDegreesAndConvertToNum(el) {
-    return +el.textContent.replace('°', '');
-}
 function executeProgram(input) {
     if (input === '') {
         transformedUserInput = getUserInput();
@@ -109,7 +50,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('berlin');
+    executeProgram('sahara');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -134,7 +75,7 @@ function transformUserInput(input) {
 }
 
 //GET A LOCATION KEY
-let locationKey = 'location key not working hoe';
+let locationKey = 'Location key is not working';
 async function getLocationKey(input) {
     try {
         let promise = 
@@ -164,21 +105,47 @@ async function getForcast(locationKey) {
     }
 }
 
-// FIND AN INDEX OF '00:00' TO SWITCH BETWEEN TODAY/TOMORROW
-function todayOrTomorrow() {
-    let hourArr = []
-    for (let i = 0; i < 8; i++) {
-        hourArr.push(forecastArray[i]['DateTime'].substr(11,5));
+// TEMPERATUE SCALE CHANGE (C TO F/F TO C)
+let activeDegreeScale = 'C';
+let classForAnActiveDegreeScale = 'text-info';
+spanC.classList.add(classForAnActiveDegreeScale);
+
+activeDegreeButton.addEventListener('click', () => {
+    if (activeDegreeScale === 'C') {
+        activeDegreeScale = 'F';
+        convert(CtoF);
+        spanC.classList.remove(classForAnActiveDegreeScale);
+        spanF.classList.add(classForAnActiveDegreeScale);
+    } 
+    else if (activeDegreeScale === 'F') {
+        activeDegreeScale = 'C';
+        convert(FtoC);
+        spanF.classList.remove(classForAnActiveDegreeScale);
+        spanC.classList.add(classForAnActiveDegreeScale);
     }
-    return hourArr.indexOf('00:00')
+})
+
+function convert(scaleToScale) {
+    currentTemerature.textContent = scaleToScale(removeDegreesAndConvertToNum(currentTemerature)) + '°';
+    let para = document.querySelectorAll('p.paraTemp8Hs');
+    para.forEach((p) => {
+        p.textContent = scaleToScale(removeDegreesAndConvertToNum(p)) + '°';
+    })
+    paraFeelsLike.textContent = scaleToScale(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
 }
 
-//24H FORMAT -> 12H FORMAT CONVERTER
-function convertTwentyFourHourFormatToTwelve(hour) {
-    let firtTwoDigits = +hour.slice(0, 2);
-    let amOrPm = firtTwoDigits >= 12 ? 'pm' : 'am';
-    let hours = (firtTwoDigits % 12) || 12;
-    return hours + ' ' + amOrPm
+let CtoF = function (temp) {
+    let newTemp = temp * 9/5 + 32;
+    return Math.round(newTemp * 10) / 10;
+}
+
+let FtoC = function (temp) {
+    let newTemp = (temp - 32) * 5/9;
+    return Math.round(newTemp * 10) / 10;
+}
+
+function removeDegreesAndConvertToNum(el) {
+    return +el.textContent.replace('°', '');
 }
 
 //CREATING EIGHT FUTURE HOURS FORECAST
@@ -219,7 +186,6 @@ function createAndFillClickableDivs(arr) {
     let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
     insideOuterDivs.forEach((div) => {
         div.addEventListener('click', () => {
-            // body.style.cssText = 'background: none'; // ??
             displayedTime = div.id;
             changeDetails(displayedTime, arr);
             changeColorsOfAClickedDiv(div, insideOuterDivs, arr);
@@ -264,6 +230,23 @@ function changeDetails(timeFromNow, arr) {
     paraWind.textContent = arr[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
     paraUV.textContent = arr[hourFromNow]['UVIndexText'];
     paraVisibility.textContent = arr[hourFromNow]['Visibility']['Value'] + ' km';
+}
+
+// FIND AN INDEX OF '00:00' TO SWITCH BETWEEN TODAY/TOMORROW
+function todayOrTomorrow() {
+    let hourArr = []
+    for (let i = 0; i < 8; i++) {
+        hourArr.push(forecastArray[i]['DateTime'].substr(11,5));
+    }
+    return hourArr.indexOf('00:00')
+}
+
+//24H FORMAT -> 12H FORMAT CONVERTER
+function convertTwentyFourHourFormatToTwelve(hour) {
+    let firtTwoDigits = +hour.slice(0, 2);
+    let amOrPm = firtTwoDigits >= 12 ? 'pm' : 'am';
+    let hours = (firtTwoDigits % 12) || 12;
+    return hours + ' ' + amOrPm
 }
 
 function displayWeatherIcon(arr, el, index) {
