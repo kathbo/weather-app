@@ -41,8 +41,11 @@ function executeProgram(input) {
                 getSunriseAndSunset();
             })
             .catch(() => {
-                console.error('The allowed number of requests has been exceeded. Displaying fake forcast.');
-                whenLimitHasExceeded();
+                if (!alertMessageAlreadyDisplayed) {
+                    whenLimitHasExceeded();
+                    exceededRequestsAlert();  
+                }
+                alertMessageAlreadyDisplayed = true;
             })
         })
         .catch((err) => {
@@ -53,7 +56,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('sahara');
+    executeProgram('berlin');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
@@ -198,7 +201,7 @@ function createAndFillClickableDivs(arr) {
 //MANIPULATING WEATHER DETAILS
 function changeDetails(timeFromNow, arr) {
     let hourFromNow = Number(timeFromNow[0]);
-    let hoursFromMidnight = todayOrTomorrow();
+    let hoursFromMidnight = todayOrTomorrow(arr);
     if (hoursFromMidnight != -1) {
         if (hourFromNow >= hoursFromMidnight) {
             h2TodayOrTomorrow.textContent = 'Tomorrow'
@@ -230,10 +233,10 @@ function changeDetails(timeFromNow, arr) {
 }
 
 // FIND AN INDEX OF '00:00' TO SWITCH BETWEEN TODAY/TOMORROW
-function todayOrTomorrow() {
+function todayOrTomorrow(arr) {
     let hourArr = []
     for (let i = 0; i < 8; i++) {
-        hourArr.push(forecastArray[i]['DateTime'].substr(11,5));
+        hourArr.push(arr[i]['DateTime'].substr(11,5));
     }
     return hourArr.indexOf('00:00')
 }
@@ -354,6 +357,8 @@ function setABackgroundColor(temp) {
     else if (30 <= temp) body.style.cssText = 'background: linear-gradient(180deg, rgba(252,46,32,1) 0%, rgba(252,220,58,1) 100%);'
 }
 
+let alertMessageAlreadyDisplayed = false; 
+
 //FETCHING SUNSET & SUNRISE HOURS FROM A DIFFERENT API
 async function getSunriseAndSunset() {
     let promise = 
@@ -363,12 +368,23 @@ async function getSunriseAndSunset() {
     paraSunrise.textContent = sunObj['Rise'].substr(11,5);
     paraSunset.textContent = sunObj['Set'].substr(11,5);
 }
+getSunriseAndSunset().catch (() => {
+    if (!alertMessageAlreadyDisplayed) {
+        whenLimitHasExceeded();
+        exceededRequestsAlert();  
+    }
+    alertMessageAlreadyDisplayed = true;
+})
+
+let exceededRequestsAlert = () => {alert('The allowed number of requests has been exceeded. Displaying fake forcast.')}
 
 function whenLimitHasExceeded() {
-    paraSunrise.textContent = '06:47 am';
-    paraSunset.textContent = '05:03 pm';
+    paraSunrise.textContent = '06:00 am';
+    paraSunset.textContent = '05:00 pm';
+    cityAndCountry.textContent = 'City, Country'
     createAndFillClickableDivs(fakeForecastArray);
     changeDetails('0', fakeForecastArray);
+    
 }
 
 //FAKE WEATHER ARRAY TO USE, WHEN A FETCHED ONE IS NOT AVAILABLE 
