@@ -28,14 +28,17 @@ spanC.classList.add('text-info');
 activeDegreeButton.addEventListener('click', () => {
     if (activeDegreeScale === 'C') {
         activeDegreeScale = 'F';
-        convertCtoF();
+        //convertCtoF();
+        convert(CtoF)
 
         spanC.classList.remove('text-info');
         spanF.classList.add('text-info');
     } 
     else if (activeDegreeScale === 'F') {
         activeDegreeScale = 'C';
-        convertFtoC();
+        //convertFtoC();
+        convert(FtoC)
+
         spanF.classList.remove('text-info');
         spanC.classList.add('text-info');
     }
@@ -56,6 +59,15 @@ function convertFtoC() {
         p.textContent = FtoC(removeDegreesAndConvertToNum(p)) + '°';
     })
     paraFeelsLike.textContent = FtoC(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
+}
+
+function convert(scaleToScale) {
+    currentTemerature.textContent = scaleToScale(removeDegreesAndConvertToNum(currentTemerature)) + '°';
+    let para = document.querySelectorAll('p.paraTemp8Hs');
+    para.forEach((p) => {
+        p.textContent = scaleToScale(removeDegreesAndConvertToNum(p)) + '°';
+    })
+    paraFeelsLike.textContent = scaleToScale(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
 }
 
 let CtoF = function (temp) {
