@@ -27,14 +27,14 @@ activeDegreeButton.addEventListener('click', () => {
         convertCtoF()
     } 
     else if (activeDegreeScale === 'F') {
-
+        activeDegreeScale = 'C';
     }
 })
 function convertCtoF() {
     currentTemerature.textContent = CtoF(removeDegreesAndConvertToNum(currentTemerature)) + '°';
-    insideOuterDivs.forEach((div) => {
-        let para = document
-
+    let para = document.querySelectorAll('p.paraTemp8Hs');
+    para.forEach((p) => {
+        p.textContent = CtoF(removeDegreesAndConvertToNum(p)) + '°';
     })
     paraFeelsLike.textContent = CtoF(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
 }
@@ -176,6 +176,7 @@ function createAndFillClickableDivs(arr) {
         insideOuterDiv.classList.add('insideOuterDiv');
         insideOuterDiv.setAttribute('id', `${x}HoursFromNow`);
         let paraTemp = document.createElement('p');
+        paraTemp.classList.add('paraTemp8Hs')
         let temp = arr[x]['Temperature']['Value'];
         paraTemp.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°'; 
         insideOuterDiv.appendChild(icon);
@@ -187,7 +188,7 @@ function createAndFillClickableDivs(arr) {
     let insideOuterDivs = document.querySelectorAll('div.insideOuterDiv');
     insideOuterDivs.forEach((div) => {
         div.addEventListener('click', () => {
-            body.style.cssText = 'background: none';
+            // body.style.cssText = 'background: none'; // ??
             displayedTime = div.id;
             changeDetails(displayedTime, arr);
             changeColorsOfAClickedDiv(div, insideOuterDivs, arr);
@@ -207,15 +208,30 @@ function changeDetails(timeFromNow, arr) {
         }
     }
     displayWeatherIcon(arr, currentIcon, hourFromNow);
+    
     let temp = arr[hourFromNow]['Temperature']['Value'];
-    currentTemerature.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°';
+    let feelsLikeTemp = arr[hourFromNow]['RealFeelTemperature']['Value'];
+    
+    if (activeDegreeScale === 'F') {
+        let tempF = CtoF(temp);
+        let feelsLikeTempF = CtoF(feelsLikeTemp);
+
+        currentTemerature.textContent = +tempF % 1 === 0 ? tempF + '.0' + '°': tempF + '°';
+        paraFeelsLike.textContent = feelsLikeTempF + '°';
+
+    } else if (activeDegreeScale === 'C') {
+        currentTemerature.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°';
+        paraFeelsLike.textContent = feelsLikeTemp + '°';
+    }
+    
+    
+    
     body.style.cssText = 'background: none';
     setABackgroundColor(temp);
     paraPrecipitation.textContent = arr[hourFromNow]['PrecipitationProbability'] + '%';
     paraHumidity.textContent = arr[hourFromNow]['RelativeHumidity'] + '%';
     paraWind.textContent = arr[hourFromNow]['Wind']['Speed']['Value'] + ' km/h';
     paraUV.textContent = arr[hourFromNow]['UVIndexText'];
-    paraFeelsLike.textContent = arr[hourFromNow]['RealFeelTemperature']['Value'] + '°';
     paraVisibility.textContent = arr[hourFromNow]['Visibility']['Value'] + ' km';
 }
 
