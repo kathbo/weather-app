@@ -18,11 +18,12 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
+const activeDegreeButton = document.getElementById('celciusOrFarenheit');
 const spanC = document.getElementById('spanC');
 const spanF = document.getElementById('spanF');
 
 let activeDegreeScale = 'C';
-const activeDegreeButton = document.getElementById('celciusOrFarenheit');
+spanC.classList.add('text-info');
 
 activeDegreeButton.addEventListener('click', () => {
     if (activeDegreeScale === 'C') {
@@ -34,6 +35,7 @@ activeDegreeButton.addEventListener('click', () => {
     } 
     else if (activeDegreeScale === 'F') {
         activeDegreeScale = 'C';
+        convertFtoC();
         spanF.classList.remove('text-info');
         spanC.classList.add('text-info');
     }
@@ -45,6 +47,15 @@ function convertCtoF() {
         p.textContent = CtoF(removeDegreesAndConvertToNum(p)) + '°';
     })
     paraFeelsLike.textContent = CtoF(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
+}
+
+function convertFtoC() {
+    currentTemerature.textContent = FtoC(removeDegreesAndConvertToNum(currentTemerature)) + '°';
+    let para = document.querySelectorAll('p.paraTemp8Hs');
+    para.forEach((p) => {
+        p.textContent = FtoC(removeDegreesAndConvertToNum(p)) + '°';
+    })
+    paraFeelsLike.textContent = FtoC(removeDegreesAndConvertToNum(paraFeelsLike)) + '°';
 }
 
 let CtoF = function (temp) {
