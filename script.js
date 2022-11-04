@@ -93,6 +93,8 @@ async function getLocationKey(input) {
     } catch (err) {
         if (err.message === 'obj is null') {
            alert('Enter a city first')
+        } else if (err.message === 'NetworkError when attempting to fetch resource.') {
+            alert('Please try again tomorrow')
         } else {
             alert('Entered city does not exist')
         } 
@@ -376,16 +378,15 @@ getSunriseAndSunset().catch (() => {
     alertMessageAlreadyDisplayed = true;
 })
 
-let exceededRequestsAlert = () => {alert('The allowed number of requests has been exceeded. Displaying fake forcast.')}
-
 function whenLimitHasExceeded() {
     paraSunrise.textContent = '06:00 am';
     paraSunset.textContent = '05:00 pm';
     cityAndCountry.textContent = 'City, Country'
     createAndFillClickableDivs(fakeForecastArray);
     changeDetails('0', fakeForecastArray);
-    
 }
+
+let exceededRequestsAlert = () => {alert('The daily allowed number of requests has been exceeded. Displaying fake forcast. Please try again tomorrow')}
 
 //FAKE WEATHER ARRAY TO USE, WHEN A FETCHED ONE IS NOT AVAILABLE 
 const fakeForecastArray = [
@@ -478,11 +479,3 @@ const fakeForecastArray = [
         Visibility: {Value: 19.6}
     }
 ];
-
-// PROMISE CHECKER
-function isPromise(p) {
-    if (typeof p === 'object' && typeof p.then === 'function') {
-      return true;
-    }
-    return false;
-  }
