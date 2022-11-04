@@ -29,6 +29,9 @@ function executeProgram(input) {
         transformedUserInput = getUserInput();
         input = transformedUserInput;
     }
+    activeDegreeScale = 'C';
+    spanC.classList.add(classForAnActiveDegreeScale);
+    spanF.classList.remove(classForAnActiveDegreeScale);
     getLocationKey(input)
         .then(() => {
             getForcast(locationKey)
@@ -106,9 +109,8 @@ async function getForcast(locationKey) {
 }
 
 // TEMPERATUE SCALE CHANGE (C TO F/F TO C)
-let activeDegreeScale = 'C';
-let classForAnActiveDegreeScale = 'text-info';
-spanC.classList.add(classForAnActiveDegreeScale);
+let activeDegreeScale;
+let classForAnActiveDegreeScale = 'activeTemperatureScale';
 
 activeDegreeButton.addEventListener('click', () => {
     if (activeDegreeScale === 'C') {
@@ -169,7 +171,7 @@ function createAndFillClickableDivs(arr) {
         paraTime.textContent = convertTwentyFourHourFormatToTwelve(arr[x]['DateTime'].substr(11,5));
         if (x === 0) paraTime.textContent = 'Now';
         outerDiv.appendChild(paraTime);
-        // outer outer div with an icon and temperature
+        // outer div with an icon and temperature
         let insideOuterDiv = document.createElement('div');
         insideOuterDiv.classList.add('insideOuterDiv');
         insideOuterDiv.setAttribute('id', `${x}HoursFromNow`);
@@ -205,14 +207,11 @@ function changeDetails(timeFromNow, arr) {
         }
     }
     displayWeatherIcon(arr, currentIcon, hourFromNow);
-    
     let temp = arr[hourFromNow]['Temperature']['Value'];
     let feelsLikeTemp = arr[hourFromNow]['RealFeelTemperature']['Value'];
-    
     if (activeDegreeScale === 'F') {
         let tempF = CtoF(temp);
         let feelsLikeTempF = CtoF(feelsLikeTemp);
-
         currentTemerature.textContent = +tempF % 1 === 0 ? tempF + '.0' + '°': tempF + '°';
         paraFeelsLike.textContent = feelsLikeTempF + '°';
 
@@ -220,8 +219,6 @@ function changeDetails(timeFromNow, arr) {
         currentTemerature.textContent = +temp % 1 === 0 ? temp + '.0' + '°': temp + '°';
         paraFeelsLike.textContent = feelsLikeTemp + '°';
     }
-    
-    
     
     body.style.cssText = 'background: none';
     setABackgroundColor(temp);
@@ -249,6 +246,7 @@ function convertTwentyFourHourFormatToTwelve(hour) {
     return hours + ' ' + amOrPm
 }
 
+//DISPLAYS A WEATHER ICONA
 function displayWeatherIcon(arr, el, index) {
     el.removeAttribute('class');
     el.classList.add('bi');
@@ -373,7 +371,7 @@ function whenLimitHasExceeded() {
     changeDetails('0', fakeForecastArray);
 }
 
-
+//FAKE WEATHER ARRAY TO USE, WHEN A FETCHED ONE IS NOT AVAILABLE 
 const fakeForecastArray = [
     {
         WeatherIcon: 8,
