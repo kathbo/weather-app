@@ -18,16 +18,24 @@ const paraVisibility = document.getElementById('paraVisibility');
 const paraSunrise = document.getElementById('paraSunrise');
 const paraSunset = document.getElementById('paraSunset');
 
+const spanC = document.getElementById('spanC');
+const spanF = document.getElementById('spanF');
+
 let activeDegreeScale = 'C';
 const activeDegreeButton = document.getElementById('celciusOrFarenheit');
 
 activeDegreeButton.addEventListener('click', () => {
     if (activeDegreeScale === 'C') {
         activeDegreeScale = 'F';
-        convertCtoF()
+        convertCtoF();
+
+        spanC.classList.remove('text-info');
+        spanF.classList.add('text-info');
     } 
     else if (activeDegreeScale === 'F') {
         activeDegreeScale = 'C';
+        spanF.classList.remove('text-info');
+        spanC.classList.add('text-info');
     }
 })
 function convertCtoF() {
