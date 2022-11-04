@@ -57,18 +57,6 @@ div.eightHoursChildDivs {
     }
 }
 
-.clickedDiv {
-    transition: .1s ease-in;
-    background-color: rgba(255, 255, 255, 0.43) !important;
-    color: #202020;
-}
-
-.unclickedDiv {
-    transition: .1s ease-in;
-    background-color: rgba(58, 59, 60, 0.4274509804) !important;
-    color: white;
-}
-
 div.weatherDetailDiv {
     background-color: #ffffffde;
     color: #223f43;
@@ -97,9 +85,9 @@ footer {
     p {
         font-weight: 500;
         a {
-            color: $blue-500;
+            color: white;
             &:hover {
-                color: $blue-600;
+                color: $blue-500;
                 transition: color .1s ease-in;
             }
         }
@@ -162,4 +150,21 @@ footer {
             font-size: 1.8em;
         }
     }
+}
+
+// JS CLASSES
+.activeTemperatureScale {
+    color: $pink-500 !important;
+}
+
+.clickedDiv {
+    transition: .1s ease-in;
+    background-color: rgba(255, 255, 255, 0.43) !important;
+    color: #202020;
+}
+
+.unclickedDiv {
+    transition: .1s ease-in;
+    background-color: rgba(58, 59, 60, 0.4274509804) !important;
+    color: white;
 }
