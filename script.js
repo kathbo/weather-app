@@ -56,7 +56,7 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('berlin');
+    executeProgram('barcelona');
 }
 
 // PRESS ENTER = CLICK THE BUTTON
