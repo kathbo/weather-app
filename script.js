@@ -85,7 +85,7 @@ let locationKey = 'Location key is not working';
 async function getLocationKey(input) {
     try {
         let promise = 
-            await fetch(`http://dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`, {mode: 'cors'});
+            await fetch(`//dataservice.accuweather.com/locations/v1/cities/search?apikey=3gDsGAEp75BGo46eDPbNWjDL6zlFGslw&q=${input}`, {mode: 'cors'});
         let obj = await promise.json();
         let firstLocationObj = obj[0];
         cityAndCountry.textContent = firstLocationObj['EnglishName'].concat(', ', firstLocationObj['Country']['EnglishName'])
@@ -105,7 +105,7 @@ async function getLocationKey(input) {
 let forecastArray = [];
 async function getForcast(locationKey) {
     let forcastPromise = 
-        await fetch(`http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`, {mode: 'cors'})
+        await fetch(`//dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true&metric=true`, {mode: 'cors'})
     let obj = await forcastPromise.json();
     if (forecastArray.length != 0) forecastArray = [];
     for (let x of obj) {
@@ -365,7 +365,7 @@ let alertMessageAlreadyDisplayed = false;
 async function getSunriseAndSunset() {
     try {
         let promise = 
-            await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`, {mode: 'cors'});
+            await fetch(`//dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=%203gDsGAEp75BGo46eDPbNWjDL6zlFGslw&details=true`, {mode: 'cors'});
         let obj = await promise.json();
         let sunObj = obj['DailyForecasts'][0]['Sun'];
         paraSunrise.textContent = sunObj['Rise'].substr(11,5);
