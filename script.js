@@ -50,7 +50,6 @@ function executeProgram(input) {
         })
         .catch((err) => {
             console.error(err + 'getForcast() did not exectute properly');
-            //whenLimitHasExceeded();
         });
 }
 
@@ -59,7 +58,7 @@ window.onload = () => {
     executeProgram(randomCities[Math.floor(Math.random() * (11 - 0) + 0)]);
 }
 
-let randomCities = ['berlin', 'barcelona', 'rzeszow', 'kuala lumpur', 'yatusk', 'hanoi', 'seattle', 'kigali', 'lima', 'astana', 'tallinn'];
+let randomCities = ['berlin', 'barcelona', 'rzeszow', 'kuala lumpur', 'yakutsk', 'hanoi', 'seattle', 'kigali', 'lima', 'astana', 'tallinn'];
 
 // PRESS ENTER = CLICK THE BUTTON
 document.addEventListener('keydown', (event) => {
