@@ -56,8 +56,10 @@ function executeProgram(input) {
 
 window.onload = () => {
     textInput.value = ''
-    executeProgram('barcelona');
+    executeProgram(randomCities[Math.floor(Math.random() * (11 - 0) + 0)]);
 }
+
+let randomCities = ['berlin', 'barcelona', 'rzeszow', 'kuala lumpur', 'yatusk', 'hanoi', 'seattle', 'kigali', 'lima', 'astana', 'tallinn'];
 
 // PRESS ENTER = CLICK THE BUTTON
 document.addEventListener('keydown', (event) => {
