@@ -148,6 +148,34 @@ footer {
     }
 }
 
+// responsive for min-height: 700px
+@media (min-width: $breakpoint-lg) and (min-height: 700px) {
+    div.currentAnd8h {
+        margin: 2.5em 0 !important;
+    }
+    div.weatherDetails {
+        h3 {
+            margin: 0.75em 0 !important;
+        }
+    }
+    div.weatherDetailDiv {
+        padding: 1em 1.5em;
+    }
+    .g-4, .gx-4 {
+        --bs-gutter-x: 1rem;
+    }
+    .g-4, .gy-4 {
+        --bs-gutter-y: 1rem;
+    }
+}
+
+// responsive for max-height: 
+@media (min-width: $breakpoint-lg) and (min-height: 740px) {
+    div.currentAnd8h {
+        margin: 4em 0 !important;
+    }
+}
+
 @media (min-width: $breakpoint-xxl) {
     div.insideOuterDiv {
         i {
