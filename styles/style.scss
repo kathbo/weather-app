@@ -135,7 +135,6 @@ footer {
     body {
         width: 100%;
     }
-
     div.formDiv {
         margin-bottom: 4em;
     }
@@ -155,13 +154,13 @@ footer {
     }
     div.weatherDetails {
         h3 {
-            margin: 0.75em 0 !important;
+            margin: 0.65em 0 !important;
         }
     }
-    div.weatherDetailDiv { //done
+    div.weatherDetailDiv { 
         padding: 1em 1.5em;
     }
-    .g-4, .gx-4 {--bs-gutter-x: 1rem}; //done
+    .g-4, .gx-4 {--bs-gutter-x: 1rem};
     .g-4, .gy-4 {--bs-gutter-y: 1rem};
 }
 
@@ -183,8 +182,6 @@ footer {
     div.weatherDetailDiv {
         padding: 2em 1.5em;
     }
-    // .g-4, .gx-4 {--bs-gutter-x: 1.5rem};
-    // .g-4, .gy-4 {--bs-gutter-y: 1.5rem};
 }
 
 // responsive for min-height: 890px 
@@ -200,6 +197,15 @@ footer {
 @media (min-width: $breakpoint-lg) and (min-height: 915px) {
     div.currentAnd8h {
         margin: 6em 0 !important;
+    }
+}
+
+// responsive for min-height: 915px 
+@media (min-width: $breakpoint-lg) and (min-height: 970px) {
+    div.weatherDetails {
+        h3 {
+            margin: 1.5em 0 !important;
+        }
     }
 }
 
