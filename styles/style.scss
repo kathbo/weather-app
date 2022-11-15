@@ -158,22 +158,33 @@ footer {
             margin: 0.75em 0 !important;
         }
     }
-    div.weatherDetailDiv {
+    div.weatherDetailDiv { //done
         padding: 1em 1.5em;
     }
-    .g-4, .gx-4 {
-        --bs-gutter-x: 1rem;
-    }
-    .g-4, .gy-4 {
-        --bs-gutter-y: 1rem;
-    }
+    .g-4, .gx-4 {--bs-gutter-x: 1rem}; //done
+    .g-4, .gy-4 {--bs-gutter-y: 1rem};
 }
 
-// responsive for max-height: 
+// responsive for min-height: 740px 
 @media (min-width: $breakpoint-lg) and (min-height: 740px) {
     div.currentAnd8h {
         margin: 4em 0 !important;
     }
+}
+
+// responsive for min-height: 760px 
+@media (min-width: $breakpoint-lg) and (min-height: 760px) {
+    .g-4, .gx-4 {--bs-gutter-x: 1.5rem};
+    .g-4, .gy-4 {--bs-gutter-y: 1.5rem};
+}
+
+// responsive for min-height: 820px 
+@media (min-width: $breakpoint-lg) and (min-height: 820px) {
+    div.weatherDetailDiv {
+        padding: 2em 1.5em;
+    }
+    // .g-4, .gx-4 {--bs-gutter-x: 1.5rem};
+    // .g-4, .gy-4 {--bs-gutter-y: 1.5rem};
 }
 
 @media (min-width: $breakpoint-xxl) {
