@@ -11071,6 +11071,56 @@ footer p a:hover {
     margin: 6em 0 !important;
   }
 }
+@media (min-width: 992px) and (min-height: 700px) {
+  div.currentAnd8h {
+    margin: 2.5em 0 !important;
+  }
+  div.weatherDetails h3, div.weatherDetails .h3 {
+    margin: 0.65em 0 !important;
+  }
+  div.weatherDetailDiv {
+    padding: 1em 1.5em;
+  }
+  .g-4, .gx-4 {
+    --bs-gutter-x: 1rem;
+  }
+  .g-4, .gy-4 {
+    --bs-gutter-y: 1rem;
+  }
+}
+@media (min-width: 992px) and (min-height: 740px) {
+  div.currentAnd8h {
+    margin: 4em 0 !important;
+  }
+}
+@media (min-width: 992px) and (min-height: 760px) {
+  .g-4, .gx-4 {
+    --bs-gutter-x: 1.5rem;
+  }
+  .g-4, .gy-4 {
+    --bs-gutter-y: 1.5rem;
+  }
+}
+@media (min-width: 992px) and (min-height: 820px) {
+  div.weatherDetailDiv {
+    padding: 2em 1.5em;
+  }
+}
+@media (min-width: 992px) and (min-height: 850px) {
+  div.weatherDetails h3, div.weatherDetails .h3 {
+    margin: 1em 0 !important;
+  }
+}
+@media (min-width: 992px) and (min-height: 915px) {
+  div.currentAnd8h {
+    margin: 6em 0 !important;
+  }
+}
+@media (min-width: 992px) and (min-height: 970px) {
+  div.weatherDetails h3, div.weatherDetails .h3 {
+    margin: 1.5em 0 !important;
+  }
+}
 @media (min-width: 1400px) {
   div.insideOuterDiv i {
     font-size: 1.8em;
